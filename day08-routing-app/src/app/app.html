@@ -1,0 +1,56 @@
+<!-- Day 8: Routing & Navigation with Sidebar -->
+<div class="app-container">
+  
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>📚 Navigation</h2>
+      <p>Click a menu item to route to different pages</p>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <!-- Loop through menu items and create navigation links -->
+      @for (item of menuItems; track item.path) {
+        <a 
+          [routerLink]="item.path" 
+          routerLinkActive="active"
+          class="menu-item">
+          <span class="icon">{{ item.icon }}</span>
+          <span class="label">{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p class="hint">💡 <strong>routerLinkActive</strong> adds "active" class to current route</p>
+    </div>
+  </aside>
+  
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="content-header">
+      <h1>{{ title }}</h1>
+      <p class="subtitle">Learn how routing works in Angular with sidebar navigation</p>
+    </header>
+    
+    <!-- ROUTER OUTLET - Components load here based on the route -->
+    <div class="content-body">
+      <!-- <div class="router-explanation">
+        <h3>🔄 How Routing Works:</h3>
+        <ol>
+          <li>Click a menu item in the sidebar</li>
+          <li>Angular Router changes the URL (e.g., <code>/products</code>)</li>
+          <li>Router finds matching route in <code>app.routes.ts</code></li>
+          <li>Loads the corresponding component below ⬇️</li>
+        </ol>
+      </div> -->
+      
+      <!-- This is where routed components appear -->
+      <div class="router-outlet-container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+  
+</div>

@@ -1,0 +1,110 @@
+<!-- Day 6: @Input and @Output - Parent-Child Communication -->
+<div class="container">
+  <header class="app-header">
+    <h1>Day 6: @Input & @Output</h1>
+    <p>Learn Parent-Child Component Communication</p>
+  </header>
+
+  <main>
+    <!-- Example 1: Basic @Input and @Output -->
+    <section class="section">
+      <h2>1️⃣ Basic Example: Child Component</h2>
+      <div class="card">
+        <h3>Parent Component (This Component)</h3>
+        <p><strong>Parent Message:</strong> "{{ parentMessage }}"</p>
+        <p><strong>Parent Name:</strong> {{ parentName }}</p>
+        <p><strong>Parent Age:</strong> {{ parentAge }}</p>
+        
+        <div class="divider"></div>
+        
+        <!-- PASS DATA TO CHILD using @Input -->
+        <app-child 
+          [message]="parentMessage"
+          [userName]="parentName"
+          [userAge]="parentAge"
+          (messageSent)="handleChildMessage($event)">
+        </app-child>
+        
+        <div class="divider"></div>
+        
+        <div class="received-message" *ngIf="receivedMessage">
+          <h4>✅ Message Received from Child:</h4>
+          <p>"{{ receivedMessage }}"</p>
+        </div>
+      </div>
+      
+      <div class="info-box">
+        <h4>💡 How It Works:</h4>
+        <ul>
+          <li><strong>@Input():</strong> Parent sends data TO child → <code>[message]="parentMessage"</code></li>
+          <li><strong>@Output():</strong> Child sends data TO parent → <code>(messageSent)="handleChildMessage($event)"</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Example 2: Product Cards with @Input/@Output -->
+    <section class="section">
+      <h2>2️⃣ Real Example: Product Cards</h2>
+      <div class="product-grid">
+        <!-- Loop through products and pass each to child component -->
+        <app-product-card 
+          *ngFor="let product of products"
+          [product]="product"
+          (addToCartClicked)="addToCart($event)">
+        </app-product-card>
+      </div>
+      
+      <div class="cart-summary" *ngIf="cartItems.length > 0">
+        <h3>🛒 Cart Summary</h3>
+        <p>Items in cart: <strong>{{ cartItems.length }}</strong></p>
+        <ul>
+          <li *ngFor="let item of cartItems">{{ item.name }} - ${{ item.price }}</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Example 3: Rating Component -->
+    <section class="section">
+      <h2>3️⃣ Interactive Example: Star Rating</h2>
+      <div class="card">
+        <h3>Rate This Product</h3>
+        <app-rating 
+          [rating]="productRating"
+          (ratingChange)="onRatingChange($event)">
+        </app-rating>
+        <p class="rating-display">Current Rating: <strong>{{ productRating }} / 5</strong></p>
+      </div>
+    </section>
+
+    <!-- Visual Guide -->
+    <section class="section">
+      <h2>📚 Quick Reference</h2>
+      <div class="card">
+        <h3>Parent to Child (@Input)</h3>
+        <pre class="code-block">
+// Child Component
+@Input() message: string = '';
+
+// Parent Template
+&lt;app-child [message]="parentMessage"&gt;&lt;/app-child&gt;
+        </pre>
+        
+        <h3>Child to Parent (@Output)</h3>
+        <pre class="code-block">
+// Child Component
+@Output() messageSent = new EventEmitter&lt;string&gt;();
+sendMessage() {{ '{' }}
+  this.messageSent.emit('Hello!');
+{{ '}' }}
+
+// Parent Template
+&lt;app-child (messageSent)="handleMessage($event)"&gt;&lt;/app-child&gt;
+        </pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Day 6: Master Parent-Child Communication!</p>
+  </footer>
+</div>

@@ -1,0 +1,134 @@
+<!-- Day 7: Services & Dependency Injection -->
+<div class="container">
+  <header class="app-header">
+    <h1>Day 7: Services & DI</h1>
+    <p>Share Data & Logic Across Components</p>
+  </header>
+
+  <main>
+    <!-- Explanation Section -->
+    <section class="section">
+      <div class="info-card">
+        <h2>💡 What are Services?</h2>
+        <p><strong>Service</strong> = A class that provides specific functionality</p>
+        <p><strong>Dependency Injection (DI)</strong> = Angular automatically provides services to components</p>
+        <ul>
+          <li>✅ Share data between components</li>
+          <li>✅ Reuse logic (don't repeat code)</li>
+          <li>✅ Keep components clean and simple</li>
+          <li>✅ ONE service instance shared by ALL components</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Logger Service Example -->
+    <section class="section">
+      <h2>1️⃣ Logger Service</h2>
+      <div class="card">
+        <h3>Try the Logger Service</h3>
+        <button (click)="logMessage('Button clicked!')" class="btn">
+          📝 Log a Message
+        </button>
+        <button (click)="logMessage('Testing logger service')" class="btn">
+          📝 Log Another Message
+        </button>
+        
+        <div class="logs-display">
+          <h4>Console Logs:</h4>
+          <div *ngFor="let log of getLogs()" class="log-entry">
+            {{ log }}
+          </div>
+          <p *ngIf="getLogs().length === 0" class="empty-state">
+            No logs yet. Click a button above!
+          </p>
+        </div>
+        
+        <p class="hint">
+          💡 Logger service is injected in constructor: <code>constructor(private logger: Logger)</code>
+        </p>
+      </div>
+    </section>
+
+    <!-- Cart Service Example -->
+    <section class="section">
+      <h2>2️⃣ Cart Service (Shared Between Components)</h2>
+      <div class="card">
+        <h3>Products</h3>
+        <div class="products-grid">
+          <div *ngFor="let product of products" class="product-item">
+            <h4>{{ product.name }}</h4>
+            <p class="price">${{ product.price }}</p>
+            <button (click)="addToCart(product)" class="btn btn-primary">
+              🛒 Add to Cart
+            </button>
+          </div>
+        </div>
+        
+        <div class="cart-summary">
+          <h3>🛒 Shopping Cart</h3>
+          <p><strong>Items:</strong> {{ cartService.getCount() }}</p>
+          <p><strong>Total:</strong> ${{ cartService.getTotal() }}</p>
+          <button (click)="cartService.clearCart()" class="btn btn-danger" *ngIf="cartService.getCount() > 0">
+            Clear Cart
+          </button>
+        </div>
+        
+        <p class="hint">
+          💡 Cart service is shared - All components see the same cart!
+        </p>
+      </div>
+    </section>
+
+    <!-- Components Sharing Data -->
+    <section class="section">
+      <h2>3️⃣ Data Service (Shared Between Components)</h2>
+      <div class="components-grid">
+        <app-component-a></app-component-a>
+        <app-component-b></app-component-b>
+      </div>
+      <p class="highlight-box">
+        ✨ Both components use the SAME Data service!<br>
+        When Component A changes the message, Component B sees the change instantly!
+      </p>
+    </section>
+
+    <!-- Code Example -->
+    <section class="section">
+      <h2>📚 How to Use Services</h2>
+      <div class="card">
+        <h3>Step 1: Create Service</h3>
+        <pre class="code-block">
+ng generate service services/logger
+
+// logger.service.ts
+@Injectable({{ '{' }}
+  providedIn: 'root'  // Available everywhere
+{{ '}' }})
+export class Logger {{ '{' }}
+  log(message: string) {{ '{' }}
+    console.log(message);
+  {{ '}' }}
+{{ '}' }}
+        </pre>
+
+        <h3>Step 2: Inject in Component</h3>
+        <pre class="code-block">
+export class MyComponent {{ '{' }}
+  // Dependency Injection happens here!
+  constructor(private logger: Logger) {{ '{' }}
+    this.logger.log('Component initialized');
+  {{ '}' }}
+  
+  doSomething() {{ '{' }}
+    this.logger.log('Action performed');
+  {{ '}' }}
+{{ '}' }}
+        </pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Day 7: Services make your code reusable and organized!</p>
+  </footer>
+</div>

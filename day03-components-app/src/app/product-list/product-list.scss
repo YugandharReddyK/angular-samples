@@ -1,0 +1,35 @@
+.product-list {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background-color 0.3s;
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.product-item:hover {
+  background-color: #f7fafc;
+}
+
+.product-name {
+  font-weight: 500;
+  color: #2d3748;
+  font-size: 1.1rem;
+}
+
+.product-price {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,67 @@
+.gallery-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.gallery-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s;
+  border: 3px solid transparent;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+}
+
+.gallery-item.selected {
+  border-color: #667eea;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item p {
+  padding: 0.75rem;
+  background: #f7fafc;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+}
+
+.selected-info {
+  background: #eef2ff;
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-top: 1.5rem;
+  border-left: 4px solid #667eea;
+}
+
+.selected-info h4 {
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.gallery-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 1rem;
+  line-height: 1.6;
+}

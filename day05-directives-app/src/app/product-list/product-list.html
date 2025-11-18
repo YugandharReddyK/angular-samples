@@ -1,0 +1,15 @@
+<!-- EXAMPLE: Using *ngFor to loop through products -->
+<div class="component-card">
+  <h3>🛒 Product List (*ngFor Demo)</h3>
+  <div class="product-grid">
+    <!-- Loop through each product -->
+    <div *ngFor="let product of products" class="product-item">
+      <h4>{{ product.name }}</h4>
+      <p class="price">${{ product.price }}</p>
+      <!-- Use *ngIf to show/hide based on stock -->
+      <span *ngIf="product.inStock" class="badge in-stock">✅ In Stock</span>
+      <span *ngIf="!product.inStock" class="badge out-of-stock">❌ Out of Stock</span>
+    </div>
+  </div>
+  <p class="hint">💡 This uses *ngFor to repeat the product card for each item!</p>
+</div>

@@ -1,0 +1,386 @@
+/* Day 8: Global Styles for Routing App */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  line-height: 1.6;
+}
+
+/* PAGE CONTENT STYLES (used by all routed components) */
+.page-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-content h2 {
+  color: #2d3748;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-content .intro {
+  font-size: 1.125rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+}
+
+/* INFO BOX */
+.info-box {
+  background: #eef2ff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  margin-bottom: 2rem;
+}
+
+.info-box h3 {
+  color: #667eea;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.info-box ul {
+  margin-left: 1.5rem;
+  color: #4a5568;
+}
+
+.info-box li {
+  margin: 0.5rem 0;
+}
+
+.info-box code {
+  background: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* FEATURE GRID (Home page) */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.feature-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.feature-card h4 {
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-size: 1.125rem;
+}
+
+.feature-card p {
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+/* CODE EXAMPLE */
+.code-example {
+  background: #2d3748;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.code-example h3 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.code-example pre {
+  margin: 0;
+}
+
+.code-example code {
+  color: #4ade80;
+  font-family: 'Courier New', monospace;
+  line-height: 1.6;
+}
+
+.code-example .note {
+  color: #fbbf24;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* PRODUCTS GRID */
+.products-list h3 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.product-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}
+
+.product-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-item h4 {
+  color: #2d3748;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.product-item p {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+/* HINT BOX */
+.hint-box {
+  background: #fef3c7;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+}
+
+.hint-box p {
+  margin: 0;
+  color: #78350f;
+}
+
+/* ABOUT PAGE */
+.about-section {
+  margin-bottom: 2rem;
+}
+
+.about-section h3 {
+  color: #2d3748;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.about-list {
+  margin-left: 1.5rem;
+  color: #4a5568;
+}
+
+.about-list li {
+  margin: 0.75rem 0;
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.concept-card {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.concept-card h4 {
+  color: #667eea;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.concept-card p {
+  color: #718096;
+  font-size: 0.875rem;
+}
+
+.concept-card code {
+  background: #eef2ff;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.tech-stack {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+}
+
+.tech-stack h3 {
+  margin-bottom: 0.5rem;
+}
+
+.tech-stack p {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+/* CONTACT PAGE */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.contact-card h3 {
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.contact-card p {
+  color: #718096;
+  font-size: 0.938rem;
+}
+
+.experiment-box {
+  background: #d1fae5;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #10b981;
+}
+
+.experiment-box h3 {
+  color: #065f46;
+  margin-bottom: 1rem;
+}
+
+.experiment-box ol {
+  margin-left: 1.5rem;
+  color: #065f46;
+}
+
+.experiment-box li {
+  margin: 0.5rem 0;
+}
+
+/* NOT FOUND PAGE */
+.error-page {
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.error-info {
+  text-align: left;
+  background: #fee2e2;
+  border-left-color: #ef4444;
+}
+
+.error-info h3 {
+  color: #991b1b;
+}
+
+.error-info li {
+  color: #7f1d1d;
+}
+
+.navigation-help {
+  margin: 2rem 0;
+}
+
+.navigation-help h3 {
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.navigation-help p {
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+
+.quick-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quick-link {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.quick-link:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

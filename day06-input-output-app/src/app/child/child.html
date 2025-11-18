@@ -1,0 +1,17 @@
+<!-- Child Component - Receives data via @Input, Sends via @Output -->
+<div class="child-component">
+  <h4>👶 Child Component</h4>
+  
+  <!-- Display data received from parent via @Input -->
+  <div class="received-data">
+    <p>📥 <strong>Received from Parent:</strong></p>
+    <p>Message: "{{ message }}"</p>
+    <p>User Name: {{ userName }}</p>
+    <p>User Age: {{ userAge }}</p>
+  </div>
+  
+  <!-- Button to send data back to parent via @Output -->
+  <button (click)="sendMessageToParent()" class="btn">
+    📤 Send Message to Parent
+  </button>
+</div>

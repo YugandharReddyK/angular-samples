@@ -1,0 +1,13 @@
+<!-- Rating Component - Receives rating via @Input, Sends changes via @Output -->
+<div class="rating-component">
+  <div class="stars">
+    <span 
+      *ngFor="let star of stars"
+      (click)="setRating(star)"
+      [class.filled]="star <= rating"
+      class="star">
+      {{ star <= rating ? '⭐' : '☆' }}
+    </span>
+  </div>
+  <p class="hint">Click a star to set rating (sends to parent via @Output)</p>
+</div>

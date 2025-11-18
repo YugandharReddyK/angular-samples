@@ -1,0 +1,105 @@
+<!-- Day 4: Data Binding -->
+<div class="container">
+  <header class="app-header">
+    <h1>{{ title }}</h1>
+    <p>{{ greeting }}</p>
+  </header>
+
+  <main>
+    <!-- Section 1: Interpolation -->
+    <section class="section">
+      <h2>1️⃣ Interpolation {{ '{{ }}' }}</h2>
+      <div class="card">
+        <h3>Component → Template (One-Way)</h3>
+        <div class="examples">
+          <p><strong>Simple Variable:</strong> {{ userName }}</p>
+          <p><strong>Expression:</strong> 2 + 2 = {{ 2 + 2 }}</p>
+          <p><strong>Method Call:</strong> Sum of 10 + 20 = {{ calculateSum(10, 20) }}</p>
+          <p><strong>Current Year:</strong> © {{ currentYear }}</p>
+          <p><strong>String Method:</strong> {{ userName.toUpperCase() }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Property Binding -->
+    <section class="section">
+      <h2>2️⃣ Property Binding [property]="value"</h2>
+      <div class="card">
+        <h3>Component → Template (One-Way)</h3>
+        <div class="examples">
+          <p><strong>Image src binding:</strong></p>
+          <img [src]="imageUrl" alt="Angular Logo" style="width: 200px; margin: 10px 0;" />
+          
+          <p><strong>Button disabled state:</strong></p>
+          <button [disabled]="isDisabled" class="btn">
+            {{ isDisabled ? 'Button is Disabled' : 'Button is Enabled' }}
+          </button>
+          <button (click)="toggleDisabled()" class="btn">
+            Toggle Disabled State
+          </button>
+          
+          <p><strong>Class binding:</strong></p>
+          <button [className]="buttonClass">Styled Button</button>
+          
+          <p><strong>Style binding:</strong></p>
+          <div [style.backgroundColor]="isDisabled ? 'red' : 'green'" 
+               [style.color]="'white'" 
+               [style.padding.px]="20"
+               style="text-align: center; border-radius: 4px;">
+            Status: {{ isDisabled ? 'Inactive' : 'Active' }}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Event Binding -->
+    <section class="section">
+      <h2>3️⃣ Event Binding (event)="handler()"</h2>
+      <div class="card">
+        <h3>Template → Component (One-Way)</h3>
+        <div class="examples">
+          <p><strong>Click Counter:</strong> {{ clickCount }} clicks</p>
+          <p><strong>Last Clicked:</strong> {{ lastClicked || 'None yet' }}</p>
+          
+          <button (click)="handleClick('Button 1')" class="btn">Button 1</button>
+          <button (click)="handleClick('Button 2')" class="btn">Button 2</button>
+          <button (click)="clickCount = 0; lastClicked = ''" class="btn btn-danger">Reset</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Two-Way Binding -->
+    <section class="section">
+      <h2>4️⃣ Two-Way Binding [(ngModel)]="value"</h2>
+      <div class="card">
+        <h3>Component ↔ Template (Two-Way)</h3>
+        <div class="examples">
+          <p><strong>Type something:</strong></p>
+          <input 
+            type="text" 
+            [(ngModel)]="userInput" 
+            placeholder="Enter text here..."
+            class="form-input"
+          />
+          <p><strong>You typed:</strong> <span class="highlight">{{ userInput || '(nothing yet)' }}</span></p>
+          <p><strong>Character count:</strong> {{ userInput.length }}</p>
+          <p><strong>Uppercase:</strong> {{ userInput.toUpperCase() }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Components -->
+    <section class="section">
+      <h2>🎯 Interactive Examples</h2>
+      <div class="components-grid">
+        <app-counter></app-counter>
+        <app-user-form></app-user-form>
+      </div>
+      <app-image-gallery></app-image-gallery>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Day 4: All 4 Types of Data Binding in Action!</p>
+  </footer>
+</div>

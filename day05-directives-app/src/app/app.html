@@ -1,0 +1,185 @@
+<!-- Day 5: Directives in Action -->
+<div class="container">
+  <header class="app-header">
+    <h1>{{ title }}</h1>
+    <p>Learn *ngIf, *ngFor, [ngClass], and [ngStyle]</p>
+  </header>
+
+  <main>
+    <!-- Section 1: *ngIf -->
+    <section class="section">
+      <h2>1️⃣ *ngIf - Conditional Rendering</h2>
+      
+      <div class="card">
+        <h3>Basic *ngIf</h3>
+        <button (click)="toggleMessage()" class="btn">Toggle Message</button>
+        <p *ngIf="showMessage" class="alert alert-info">
+          ✅ This message is visible because showMessage is TRUE
+        </p>
+        <p *ngIf="!showMessage" class="alert alert-warning">
+          ❌ Message is hidden because showMessage is FALSE
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>*ngIf with else</h3>
+        <button (click)="toggleLogin()" class="btn">Toggle Login</button>
+        <div *ngIf="isLoggedIn; else loggedOut">
+          <p class="alert alert-success">👤 Welcome! You are logged in.</p>
+        </div>
+        <ng-template #loggedOut>
+          <p class="alert alert-danger">🔒 Please log in to continue.</p>
+        </ng-template>
+      </div>
+
+      <div class="card">
+        <h3>*ngIf with Multiple Conditions</h3>
+        <div *ngIf="userRole === 'admin'" class="alert alert-success">
+          🔐 Admin Access Granted
+        </div>
+        <div *ngIf="userRole === 'user'" class="alert alert-info">
+          👤 User Access Granted
+        </div>
+        <div *ngIf="userRole === 'guest'" class="alert alert-warning">
+          👁️ Guest Access - Limited Features
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: *ngFor -->
+    <section class="section">
+      <h2>2️⃣ *ngFor - Loop Through Lists</h2>
+      
+      <div class="card">
+        <h3>Simple *ngFor</h3>
+        <ul class="fruit-list">
+          <li *ngFor="let fruit of fruits">🍎 {{ fruit }}</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>*ngFor with Index</h3>
+        <ul class="numbered-list">
+          <li *ngFor="let fruit of fruits; let i = index">
+            {{ i + 1 }}. {{ fruit }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>*ngFor with Complex Objects</h3>
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index; let isFirst = first; let isLast = last"
+                [class.first-row]="isFirst"
+                [class.last-row]="isLast">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                <span [class.status-active]="user.active" 
+                      [class.status-inactive]="!user.active">
+                  {{ user.active ? 'Active' : 'Inactive' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: ngClass -->
+    <section class="section">
+      <h2>3️⃣ [ngClass] - Dynamic Classes</h2>
+      
+      <div class="card">
+        <h3>Single Class Binding</h3>
+        <button (click)="toggleActive()" class="btn">Toggle Active</button>
+        <div class="demo-box" [ngClass]="{ 'active': isActive }">
+          Status: {{ isActive ? 'Active' : 'Inactive' }}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Multiple Classes</h3>
+        <button (click)="toggleActive()" class="btn">Toggle Active</button>
+        <button (click)="toggleHighlight()" class="btn">Toggle Highlight</button>
+        <div class="demo-box" 
+             [ngClass]="{ 
+               'active': isActive, 
+               'highlighted': isHighlighted 
+             }">
+          Active: {{ isActive }} | Highlighted: {{ isHighlighted }}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Status-based Classes</h3>
+        <div class="button-group">
+          <button (click)="changeStatus('success')" class="btn">Success</button>
+          <button (click)="changeStatus('warning')" class="btn">Warning</button>
+          <button (click)="changeStatus('error')" class="btn">Error</button>
+        </div>
+        <div class="status-box" 
+             [ngClass]="{
+               'status-success': currentStatus === 'success',
+               'status-warning': currentStatus === 'warning',
+               'status-error': currentStatus === 'error'
+             }">
+          Current Status: {{ currentStatus.toUpperCase() }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: ngStyle -->
+    <section class="section">
+      <h2>4️⃣ [ngStyle] - Dynamic Styles</h2>
+      
+      <div class="card">
+        <h3>Font Size Control</h3>
+        <label>Font Size: {{ fontSize }}px</label>
+        <input type="range" [(ngModel)]="fontSize" min="12" max="48" />
+        <p [ngStyle]="{ 'font-size.px': fontSize }">
+          This text changes size dynamically!
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Color Controls</h3>
+        <label>Text Color: <input type="color" [(ngModel)]="textColor" /></label>
+        <label>Background: <input type="color" [(ngModel)]="backgroundColor" /></label>
+        <div [ngStyle]="{
+               'color': textColor,
+               'background-color': backgroundColor,
+               'padding': '20px',
+               'border-radius': '8px',
+               'margin-top': '10px'
+             }">
+          Dynamic styling with ngStyle!
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Components -->
+    <section class="section">
+      <h2>🎯 Complete Examples</h2>
+      <div class="components-grid">
+        <app-product-list></app-product-list>
+        <app-todo-list></app-todo-list>
+      </div>
+      <app-status-dashboard></app-status-dashboard>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Day 5: Mastering Angular Directives!</p>
+  </footer>
+</div>

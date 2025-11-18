@@ -1,0 +1,24 @@
+<!-- Image Gallery: Demonstrates Property Binding & Event Binding -->
+<div class="gallery-card">
+  <h3>🖼️ Interactive Image Gallery</h3>
+  <div class="gallery-grid">
+    <div *ngFor="let image of images" 
+         class="gallery-item"
+         [class.selected]="image.selected"
+         (click)="selectImage(image)">
+      <img [src]="image.url" [alt]="image.title" />
+      <p>{{ image.title }}</p>
+    </div>
+  </div>
+  
+  <div *ngIf="selectedImage" class="selected-info">
+    <h4>Selected Image:</h4>
+    <p><strong>Title:</strong> {{ selectedImage.title }}</p>
+    <p><strong>ID:</strong> {{ selectedImage.id }}</p>
+  </div>
+  
+  <p class="gallery-info">
+    <strong>Property Binding:</strong> [src], [alt], [class.selected]<br>
+    <strong>Event Binding:</strong> (click) to select images
+  </p>
+</div>

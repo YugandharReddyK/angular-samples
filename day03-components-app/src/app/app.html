@@ -1,0 +1,38 @@
+<!-- 
+  Day 3: Components Deep Dive
+  This app demonstrates Angular component fundamentals
+-->
+
+<div class="container">
+  <!-- Using Header Component -->
+  <app-header></app-header>
+
+  <main>
+    <section class="intro">
+      <h1>{{ title }}</h1>
+      <p>This app demonstrates how to create and use multiple components in Angular.</p>
+      <p>Below you'll see examples of different component types working together.</p>
+    </section>
+
+    <!-- Using Card Components -->
+    <section class="cards-section">
+      <h2>Card Components (Reusable UI Elements)</h2>
+      <div class="cards-grid">
+        <app-card></app-card>
+        <app-card></app-card>
+        <app-card></app-card>
+      </div>
+    </section>
+
+    <!-- Using Product List Component -->
+    <section class="products-section">
+      <h2>Product List Component</h2>
+      <app-product-list></app-product-list>
+    </section>
+  </main>
+
+  <!-- Using Footer Component -->
+  <app-footer></app-footer>
+</div>
+
+

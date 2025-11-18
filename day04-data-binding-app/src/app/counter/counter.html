@@ -1,0 +1,14 @@
+<!-- Counter Component: Demonstrates Event Binding & Interpolation -->
+<div class="counter-card">
+  <h3>🔢 Interactive Counter</h3>
+  <div class="counter-display">{{ count }}</div>
+  <div class="counter-buttons">
+    <button (click)="decrement()" class="btn btn-secondary">- Decrease</button>
+    <button (click)="reset()" class="btn btn-danger">Reset</button>
+    <button (click)="increment()" class="btn btn-primary">+ Increase</button>
+  </div>
+  <p class="counter-info">
+    <strong>Event Binding:</strong> (click) triggers methods<br>
+    <strong>Interpolation:</strong> {{ '{{ count }}' }} displays the value
+  </p>
+</div>

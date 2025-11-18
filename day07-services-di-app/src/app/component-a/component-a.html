@@ -1,0 +1,32 @@
+<!-- Component A - Uses Data Service -->
+<div class="component-box component-a">
+  <h3>Component A</h3>
+  
+  <div class="data-display">
+    <h4>Shared Message:</h4>
+    <p class="message">"{{ message }}"</p>
+    
+    <input 
+      type="text" 
+      [(ngModel)]="message"
+      placeholder="Update message"
+      class="input-field"
+    />
+    <button (click)="updateMessage(message)" class="btn btn-sm">
+      Update Message
+    </button>
+  </div>
+  
+  <div class="users-display">
+    <h4>Users from Data Service:</h4>
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.name }} - {{ user.role }}
+      </li>
+    </ul>
+  </div>
+  
+  <p class="component-hint">
+    💡 This component INJECTS Data service
+  </p>
+</div>

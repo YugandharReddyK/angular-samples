@@ -1,0 +1,35 @@
+<div class="page-content error-page">
+  <div class="error-icon">🚫</div>
+  <h2>404 - Page Not Found</h2>
+  <p class="intro">Oops! The page you're looking for doesn't exist.</p>
+  
+  <div class="info-box error-info">
+    <h3>What Happened?</h3>
+    <ul>
+      <li>You navigated to a URL that doesn't match any route</li>
+      <li>The <strong>wildcard route</strong> (<code>**</code>) caught this request</li>
+      <li>Router loaded: <code>NotFoundComponent</code></li>
+    </ul>
+  </div>
+  
+  <div class="code-example">
+    <h3>Wildcard Route Configuration:</h3>
+    <pre><code>{{ '{' }} path: '**', component: NotFoundComponent {{ '}' }}</code></pre>
+    <p class="note">⚠️ This route MUST be last in the routes array!</p>
+  </div>
+  
+  <div class="navigation-help">
+    <h3>Where would you like to go?</h3>
+    <p>Try one of these valid routes:</p>
+    <div class="quick-links">
+      <a href="/home" class="quick-link">🏠 Home</a>
+      <a href="/products" class="quick-link">📦 Products</a>
+      <a href="/about" class="quick-link">ℹ️ About</a>
+      <a href="/contact" class="quick-link">📧 Contact</a>
+    </div>
+  </div>
+  
+  <div class="hint-box">
+    <p>💡 <strong>Learning Tip:</strong> Wildcard routes are essential for handling invalid URLs and providing a good user experience.</p>
+  </div>
+</div>

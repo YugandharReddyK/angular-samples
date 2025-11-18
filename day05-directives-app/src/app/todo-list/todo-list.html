@@ -1,0 +1,13 @@
+<!-- EXAMPLE: Using *ngFor with ngClass -->
+<div class="component-card">
+  <h3>✅ Todo List (ngClass Demo)</h3>
+  <ul class="todo-list">
+    <!-- Loop through todos -->
+    <li *ngFor="let todo of todos" 
+        (click)="toggleTodo(todo)"
+        [ngClass]="{ 'completed': todo.completed }">
+      {{ todo.title }}
+    </li>
+  </ul>
+  <p class="hint">💡 Click any todo to toggle completion. ngClass adds 'completed' class!</p>
+</div>

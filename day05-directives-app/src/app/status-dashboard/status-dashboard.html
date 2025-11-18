@@ -1,0 +1,25 @@
+<!-- EXAMPLE: Using ngStyle for dynamic styling -->
+<div class="component-card dashboard">
+  <h3>📊 Server Status (ngStyle Demo)</h3>
+  <div class="server-grid">
+    <!-- Loop through servers with dynamic styling -->
+    <div *ngFor="let server of servers" 
+         class="server-card"
+         [ngStyle]="{
+           'border-left': '5px solid ' + getStatusColor(server.status)
+         }">
+      <h4>{{ server.name }}</h4>
+      <p>Status: <strong>{{ server.status }}</strong></p>
+      <div class="progress-bar">
+        <div class="progress-fill" 
+             [ngStyle]="{
+               'width.%': server.uptime,
+               'background-color': getStatusColor(server.status)
+             }">
+        </div>
+      </div>
+      <p class="uptime">Uptime: {{ server.uptime }}%</p>
+    </div>
+  </div>
+  <p class="hint">💡 ngStyle dynamically sets colors and widths based on data!</p>
+</div>

@@ -1,0 +1,10 @@
+<!-- Product Card - Receives product via @Input, Sends event via @Output -->
+<div class="product-card">
+  <div class="product-icon">{{ product.image }}</div>
+  <h3>{{ product.name }}</h3>
+  <p class="price">${{ product.price }}</p>
+  <button (click)="onAddToCart()" class="btn btn-primary">
+    🛒 Add to Cart
+  </button>
+  <p class="hint">Sends event to parent using @Output</p>
+</div>
