@@ -1,0 +1,63 @@
+<div class="app-container">
+  
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>📝 {{ title }}</h2>
+      <p>Interactive Forms Tutorial</p>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <!-- Home -->
+      @for (item of menuItems.slice(0, 1); track item.path) {
+        <a 
+          [routerLink]="item.path" 
+          routerLinkActive="active"
+          class="menu-item">
+          <span class="icon">{{ item.icon }}</span>
+          <span class="label">{{ item.label }}</span>
+        </a>
+      }
+
+      <!-- Day 10: Template-Driven Forms -->
+      <div class="menu-section">
+        <div class="section-title">Day 10: Template-Driven</div>
+        @for (item of getItemsByCategory('Template-Driven'); track item.path) {
+          <a 
+            [routerLink]="item.path" 
+            routerLinkActive="active"
+            class="menu-item">
+            <span class="icon">{{ item.icon }}</span>
+            <span class="label">{{ item.label }}</span>
+          </a>
+        }
+      </div>
+
+      <!-- Day 11: Reactive Forms -->
+      <div class="menu-section">
+        <div class="section-title">Day 11: Reactive Forms</div>
+        @for (item of getItemsByCategory('Reactive'); track item.path) {
+          <a 
+            [routerLink]="item.path" 
+            routerLinkActive="active"
+            class="menu-item">
+            <span class="icon">{{ item.icon }}</span>
+            <span class="label">{{ item.label }}</span>
+          </a>
+        }
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p class="hint">💡 Compare both form approaches</p>
+    </div>
+  </aside>
+  
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-content">
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  
+</div>

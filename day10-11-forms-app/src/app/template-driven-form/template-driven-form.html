@@ -1,0 +1,117 @@
+<div class="page-content">
+  <h2>📝 Day 10: Basic Template-Driven Form</h2>
+  <p class="intro">Learn the fundamentals of template-driven forms using <code>[(ngModel)]</code> for two-way data binding.</p>
+  
+  <div class="info-box">
+    <h3>🎯 What is a Template-Driven Form?</h3>
+    <ul>
+      <li>Form logic is defined in the <strong>template (HTML)</strong></li>
+      <li>Uses <code>FormsModule</code> from <code>@angular/forms</code></li>
+      <li>Two-way binding with <code>[(ngModel)]</code></li>
+      <li>Angular automatically tracks form state and validation</li>
+    </ul>
+  </div>
+
+  <div class="form-container">
+    <h3>Simple User Form</h3>
+    
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input 
+          type="text" 
+          id="username"
+          name="username" 
+          [(ngModel)]="username" 
+          required
+          minlength="3"
+          #usernameField="ngModel"
+          [class.invalid]="usernameField.invalid && usernameField.touched"
+          [class.valid]="usernameField.valid && usernameField.touched">
+        
+        @if (usernameField.invalid && usernameField.touched) {
+          <span class="error-message">
+            @if (usernameField.errors?.['required']) {
+              Username is required
+            }
+            @if (usernameField.errors?.['minlength']) {
+              Username must be at least 3 characters
+            }
+          </span>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email"
+          name="email" 
+          [(ngModel)]="email" 
+          required
+          email
+          #emailField="ngModel"
+          [class.invalid]="emailField.invalid && emailField.touched"
+          [class.valid]="emailField.valid && emailField.touched">
+        
+        @if (emailField.invalid && emailField.touched) {
+          <span class="error-message">
+            @if (emailField.errors?.['required']) {
+              Email is required
+            }
+            @if (emailField.errors?.['email']) {
+              Please enter a valid email address
+            }
+          </span>
+        }
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+          Submit Form
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm(userForm)">
+          Reset
+        </button>
+      </div>
+
+      <!-- Form State Info -->
+      <div class="form-state">
+        <h4>Form State:</h4>
+        <ul>
+          <li>Valid: <strong>{{ userForm.valid }}</strong></li>
+          <li>Invalid: <strong>{{ userForm.invalid }}</strong></li>
+          <li>Touched: <strong>{{ userForm.touched }}</strong></li>
+          <li>Pristine: <strong>{{ userForm.pristine }}</strong></li>
+        </ul>
+      </div>
+    </form>
+  </div>
+
+  @if (submitted) {
+    <div class="success-box">
+      <h3>✅ Form Submitted Successfully!</h3>
+      <p><strong>Username:</strong> {{ username }}</p>
+      <p><strong>Email:</strong> {{ email }}</p>
+    </div>
+  }
+
+  <div class="hint-box">
+    <h4>💡 Key Concepts:</h4>
+    <p><strong>1. FormsModule:</strong> Must be imported to use template-driven forms</p>
+    <pre><code>imports: [FormsModule]</code></pre>
+    
+    <p><strong>2. ngModel:</strong> Two-way data binding</p>
+    <pre><code>&lt;input [(ngModel)]="username" name="username"&gt;</code></pre>
+    
+    <p><strong>3. Template Reference:</strong> Access form/field state</p>
+    <pre><code>&lt;input #usernameField="ngModel"&gt;
+&#64;if (usernameField.invalid) &#123; ... &#125;</code></pre>
+    
+    <p><strong>4. Validation:</strong> HTML5 and Angular validators</p>
+    <pre><code>&lt;input required minlength="3" email&gt;</code></pre>
+  </div>
+</div>

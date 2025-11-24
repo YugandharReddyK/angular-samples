@@ -1,0 +1,114 @@
+<div class="page-content">
+  <h2>🏠 Welcome to Angular Forms Tutorial</h2>
+  <p class="intro">Learn both <strong>Template-Driven</strong> and <strong>Reactive</strong> approaches to building forms in Angular!</p>
+  
+  <div class="info-box">
+    <h3>🎯 What You'll Learn:</h3>
+    <ul>
+      <li><strong>Day 10:</strong> Template-Driven Forms - Simple forms with ngModel</li>
+      <li><strong>Day 11:</strong> Reactive Forms - Powerful forms with FormGroup and validators</li>
+      <li>Form validation and error handling</li>
+      <li>When to use each approach</li>
+    </ul>
+  </div>
+
+  <div class="comparison-grid">
+    <div class="comparison-card template-driven">
+      <h3>📝 Day 10: Template-Driven Forms</h3>
+      <div class="badge">Beginner Friendly</div>
+      <p><strong>Approach:</strong> Define form logic in the HTML template</p>
+      <p><strong>Key Feature:</strong> Two-way binding with <code>[(ngModel)]</code></p>
+      
+      <h4>Pros:</h4>
+      <ul>
+        <li>✅ Easy to learn and quick to implement</li>
+        <li>✅ Less code required</li>
+        <li>✅ Perfect for simple forms</li>
+        <li>✅ Familiar to developers from other frameworks</li>
+      </ul>
+      
+      <h4>Cons:</h4>
+      <ul>
+        <li>❌ Limited control from TypeScript</li>
+        <li>❌ Harder to test</li>
+        <li>❌ Less suitable for complex validation</li>
+        <li>❌ Not ideal for dynamic forms</li>
+      </ul>
+
+      <div class="example-code">
+        <h4>Example:</h4>
+        <pre><code>&lt;input [(ngModel)]="username" required&gt;</code></pre>
+      </div>
+    </div>
+
+    <div class="comparison-card reactive">
+      <h3>⚛️ Day 11: Reactive Forms</h3>
+      <div class="badge">Production Ready</div>
+      <p><strong>Approach:</strong> Define form logic in the TypeScript component</p>
+      <p><strong>Key Feature:</strong> FormGroup and FormControl objects</p>
+      
+      <h4>Pros:</h4>
+      <ul>
+        <li>✅ Full programmatic control</li>
+        <li>✅ Easy to test</li>
+        <li>✅ Perfect for complex validation</li>
+        <li>✅ Great for dynamic forms</li>
+        <li>✅ Immutable data flow</li>
+      </ul>
+      
+      <h4>Cons:</h4>
+      <ul>
+        <li>❌ More boilerplate code</li>
+        <li>❌ Steeper learning curve</li>
+        <li>❌ Overkill for simple forms</li>
+      </ul>
+
+      <div class="example-code">
+        <h4>Example:</h4>
+        <pre><code>form = new FormGroup(&#123;
+  username: new FormControl('', Validators.required)
+&#125;);</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint-box">
+    <h4>💡 Which One Should You Use?</h4>
+    <p><strong>Use Template-Driven when:</strong></p>
+    <ul>
+      <li>Building simple forms (login, contact, etc.)</li>
+      <li>You want quick results with minimal code</li>
+      <li>Form logic is straightforward</li>
+    </ul>
+    <p><strong>Use Reactive when:</strong></p>
+    <ul>
+      <li>Building complex forms with dynamic fields</li>
+      <li>You need custom validators or async validation</li>
+      <li>Form needs to be unit tested</li>
+      <li>Working on large-scale applications</li>
+    </ul>
+  </div>
+
+  <div class="getting-started">
+    <h3>🚀 Getting Started</h3>
+    <p>Use the sidebar navigation to explore examples of both form types:</p>
+    <div class="nav-hints">
+      <div class="nav-hint">
+        <strong>📝 Template-Driven Examples:</strong>
+        <ul>
+          <li>Basic Template Form - Introduction to ngModel</li>
+          <li>Login Form - Complete login with validation</li>
+          <li>Contact Form - Multi-field contact form</li>
+        </ul>
+      </div>
+      <div class="nav-hint">
+        <strong>⚛️ Reactive Examples:</strong>
+        <ul>
+          <li>Basic Reactive Form - Introduction to FormGroup</li>
+          <li>Registration Form - User registration with validators</li>
+          <li>Profile Form - Complex form with dynamic fields</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

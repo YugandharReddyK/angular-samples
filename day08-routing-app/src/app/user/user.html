@@ -1,0 +1,63 @@
+<div class="page-content">
+  <h2>👤 User Profile</h2>
+
+  <div class="info-box">
+    <h3>🎯 Reading Route Parameters</h3>
+    <ul>
+      <li>Route Pattern: <code>/user/:id</code></li>
+      <li>Current ID: <code>{{ userId }}</code></li>
+      <li>Using <strong>ActivatedRoute.snapshot.paramMap.get('id')</strong> to read the parameter</li>
+    </ul>
+  </div>
+
+  @if (user) {
+    <div class="user-profile-card">
+      <div class="profile-header">
+        <div class="avatar-large">{{ user.avatar }}</div>
+        <div class="profile-info">
+          <h1>{{ user.name }}</h1>
+          <p class="email">✉️ {{ user.email }}</p>
+          <span class="role-badge">{{ user.role }}</span>
+          <p class="join-date">📅 Joined: {{ user.joinDate }}</p>
+        </div>
+      </div>
+
+      <div class="profile-section">
+        <h3>📝 Bio</h3>
+        <p>{{ user.bio }}</p>
+      </div>
+
+      <div class="profile-section">
+        <h3>🚀 Projects</h3>
+        <ul class="projects-list">
+          @for (project of user.projects; track project) {
+            <li>{{ project }}</li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+
+  @if (!user && userId) {
+    <div class="error-box">
+      <h3>❌ User Not Found</h3>
+      <p>No user found with ID: <strong>{{ userId }}</strong></p>
+      <p>Try IDs 1-5 to see different user profiles.</p>
+    </div>
+  }
+
+  <div class="navigation-buttons">
+    <button (click)="goBack()" class="btn btn-secondary">← Back</button>
+    <a [routerLink]="['/users']" class="btn btn-secondary">View All Users</a>
+  </div>
+
+  <div class="hint-box">
+    <h4>💡 Code Walkthrough:</h4>
+    <p><strong>Step 1:</strong> Inject <code>ActivatedRoute</code> in the constructor</p>
+    <pre><code>constructor(private route: ActivatedRoute) &#123;&#125;</code></pre>
+    <p><strong>Step 2:</strong> Read the parameter in <code>ngOnInit()</code></p>
+    <pre><code>this.userId = this.route.snapshot.paramMap.get('id');</code></pre>
+    <p><strong>Step 3:</strong> Use the parameter to fetch/display data</p>
+    <p><strong>Experiment:</strong> Try changing the URL to <code>/user/1</code>, <code>/user/2</code>, etc.</p>
+  </div>
+</div>

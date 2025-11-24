@@ -1,0 +1,64 @@
+.instruction {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.product-item {
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: #2196F3;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+  }
+}
+
+.product-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  margin: 0.5rem 0;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2196F3;
+  margin: 0.5rem 0;
+}
+
+.description {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  min-height: 2.5rem;
+}
+
+.view-details {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #2196F3;
+  font-weight: 500;
+  font-size: 0.9rem;
+}

@@ -1,6 +1,6 @@
 <div class="page-content">
   <h2>📦 Products Page</h2>
-  <p class="intro">This is the <strong>Products Component</strong>.</p>
+  <p class="intro">This is the <strong>Products Component</strong>. Click any product to see its details!</p>
   
   <div class="info-box">
     <h3>Current Route:</h3>
@@ -12,32 +12,25 @@
   </div>
   
   <div class="products-list">
-    <h3>Sample Products:</h3>
+    <h3>Our Products:</h3>
+    <p class="instruction">👆 Click on any product to view its details (Day 9: Route Parameters)</p>
+    
     <div class="product-grid">
-      <div class="product-item">
-        <div class="product-icon">💻</div>
-        <h4>Laptop</h4>
-        <p>$999</p>
-      </div>
-      <div class="product-item">
-        <div class="product-icon">📱</div>
-        <h4>Smartphone</h4>
-        <p>$699</p>
-      </div>
-      <div class="product-item">
-        <div class="product-icon">⌚</div>
-        <h4>Smartwatch</h4>
-        <p>$299</p>
-      </div>
-      <div class="product-item">
-        <div class="product-icon">🎧</div>
-        <h4>Headphones</h4>
-        <p>$199</p>
-      </div>
+      <!-- DAY 9: Using routerLink with route parameters -->
+      <!-- The [routerLink] directive passes the product ID as a URL parameter -->
+      @for (product of products; track product.id) {
+        <a [routerLink]="['/products', product.id]" class="product-item">
+          <div class="product-icon">{{ product.icon }}</div>
+          <h4>{{ product.name }}</h4>
+          <p class="price">${{ product.price }}</p>
+          <p class="description">{{ product.description }}</p>
+          <span class="view-details">View Details →</span>
+        </a>
+      }
     </div>
   </div>
   
   <div class="hint-box">
-    <p>💡 <strong>Tip:</strong> In Day 9, you'll learn how to pass product IDs in the URL (e.g., <code>/products/123</code>)</p>
+    <p>💡 <strong>Day 9 Concept:</strong> When you click a product, the URL changes to <code>/products/:id</code> where <code>:id</code> is the product's unique identifier. The ProductDetailComponent reads this parameter to show the right product!</p>
   </div>
 </div>

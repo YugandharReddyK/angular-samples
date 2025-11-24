@@ -1,0 +1,73 @@
+.intro {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.users-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateX(8px);
+    border-color: #2196F3;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+  }
+}
+
+.user-avatar {
+  font-size: 3rem;
+  min-width: 60px;
+  text-align: center;
+}
+
+.user-info {
+  flex: 1;
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.25rem;
+  }
+
+  .email {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .role-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #e3f2fd;
+    color: #1976d2;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #2196F3;
+  transition: transform 0.3s ease;
+}
+
+.user-card:hover .arrow {
+  transform: translateX(4px);
+}

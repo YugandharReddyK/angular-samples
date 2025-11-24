@@ -1,0 +1,141 @@
+.user-profile-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #e0e0e0;
+  align-items: flex-start;
+}
+
+.avatar-large {
+  font-size: 5rem;
+  text-align: center;
+  min-width: 100px;
+}
+
+.profile-info {
+  flex: 1;
+
+  h1 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+  }
+
+  .email {
+    color: #666;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .role-badge {
+    display: inline-block;
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: #e3f2fd;
+    color: #1976d2;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .join-date {
+    color: #999;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 0 0;
+  }
+}
+
+.profile-section {
+  margin: 2rem 0;
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: #333;
+  }
+
+  p {
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+.projects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0;
+    background: #f5f5f5;
+    border-radius: 6px;
+    border-left: 4px solid #2196F3;
+    color: #555;
+  }
+}
+
+.navigation-buttons {
+  margin: 2rem 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &.btn-secondary {
+    background-color: #757575;
+    color: white;
+
+    &:hover {
+      background-color: #616161;
+    }
+  }
+}
+
+.error-box {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+
+  h3 {
+    margin-top: 0;
+    color: #c62828;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+}
+
+pre {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+
+  code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+  }
+}

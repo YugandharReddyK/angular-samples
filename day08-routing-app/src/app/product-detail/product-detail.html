@@ -1,0 +1,71 @@
+<div class="page-content">
+  <h2>📦 Product Details</h2>
+  
+  <!-- Explanation Box -->
+  <div class="info-box">
+    <h3>🎯 Day 9: Route Parameters in Action</h3>
+    <ul>
+      <li>Route: <code>/products/:id</code></li>
+      <li>Current ID: <code>{{ productId }}</code></li>
+      <li>We use <strong>ActivatedRoute</strong> to read the <code>:id</code> parameter from the URL</li>
+      <li>The component then loads the corresponding product data</li>
+    </ul>
+  </div>
+
+  <!-- Product exists -->
+  @if (product) {
+    <div class="product-detail-card">
+      <div class="product-header">
+        <div class="product-icon-large">{{ product.icon }}</div>
+        <div class="product-info">
+          <h1>{{ product.name }}</h1>
+          <p class="description">{{ product.description }}</p>
+          <div class="price-tag">${{ product.price }}</div>
+          <div class="stock-status" [class.in-stock]="product.inStock" [class.out-of-stock]="!product.inStock">
+            {{ product.inStock ? '✅ In Stock' : '❌ Out of Stock' }}
+          </div>
+        </div>
+      </div>
+
+      <div class="product-specs">
+        <h3>📋 Specifications:</h3>
+        <ul>
+          @for (spec of product.specs; track spec) {
+            <li>{{ spec }}</li>
+          }
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" [disabled]="!product.inStock">
+          {{ product.inStock ? '🛒 Add to Cart' : 'Notify When Available' }}
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Product not found -->
+  @if (!product && productId) {
+    <div class="error-box">
+      <h3>❌ Product Not Found</h3>
+      <p>Sorry, we couldn't find a product with ID: <strong>{{ productId }}</strong></p>
+      <p>This happens when the route parameter doesn't match any product in our database.</p>
+    </div>
+  }
+
+  <!-- Navigation buttons -->
+  <div class="navigation-buttons">
+    <button (click)="goBack()" class="btn btn-secondary">← Back</button>
+    <a [routerLink]="['/products']" class="btn btn-secondary">View All Products</a>
+  </div>
+
+  <!-- Learning Note -->
+  <div class="hint-box">
+    <h4>💡 How This Works:</h4>
+    <p><strong>1. Route Definition:</strong> In <code>app.routes.ts</code>, we defined <code>&#123; path: 'products/:id', component: ProductDetailComponent &#125;</code></p>
+    <p><strong>2. Reading Parameters:</strong> In the component, we inject <code>ActivatedRoute</code> and use:</p>
+    <pre><code>this.productId = this.route.snapshot.paramMap.get('id');</code></pre>
+    <p><strong>3. Using the Parameter:</strong> We use the ID to find and display the correct product.</p>
+    <p><strong>Try it:</strong> Change the URL manually (e.g., <code>/products/2</code>, <code>/products/5</code>) and see the content update!</p>
+  </div>
+</div>

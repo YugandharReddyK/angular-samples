@@ -8,12 +8,13 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App {
-  title = 'Day 8: Routing & Navigation';
+  title = 'Day 8 & 9: Routing & Route Parameters';
   
   // Sidebar menu items
   menuItems = [
     { path: '/home', label: 'Home', icon: '🏠' },
     { path: '/products', label: 'Products', icon: '📦' },
+    { path: '/users', label: 'Users', icon: '👥' },
     { path: '/about', label: 'About', icon: 'ℹ️' },
     { path: '/contact', label: 'Contact', icon: '📧' }
   ];

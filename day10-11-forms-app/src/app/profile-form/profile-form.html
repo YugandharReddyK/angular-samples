@@ -1,0 +1,80 @@
+<div class="page-content">
+  <h2>👤 Profile Form (Reactive)</h2>
+  <p class="intro">Complete profile form with number validation and character limits.</p>
+  
+  <div class="form-container">
+    <h3>Edit Profile</h3>
+    
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="firstName">First Name *</label>
+        <input type="text" id="firstName" formControlName="firstName"
+          [class.invalid]="firstName?.invalid && firstName?.touched">
+        @if (firstName?.invalid && firstName?.touched) {
+          <span class="error-message">First name is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name *</label>
+        <input type="text" id="lastName" formControlName="lastName"
+          [class.invalid]="lastName?.invalid && lastName?.touched">
+        @if (lastName?.invalid && lastName?.touched) {
+          <span class="error-message">Last name is required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age *</label>
+        <input type="number" id="age" formControlName="age"
+          [class.invalid]="age?.invalid && age?.touched">
+        @if (age?.invalid && age?.touched) {
+          <span class="error-message">
+            @if (age?.errors?.['required']) { Age is required }
+            @if (age?.errors?.['min']) { Must be at least 18 }
+            @if (age?.errors?.['max']) { Must be under 100 }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="bio">Bio ({{ bio?.value?.length || 0 }}/200)</label>
+        <textarea id="bio" formControlName="bio"
+          [class.invalid]="bio?.invalid && bio?.touched"></textarea>
+        @if (bio?.invalid && bio?.touched) {
+          <span class="error-message">Bio must be under 200 characters</span>
+        }
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-success" [disabled]="!profileForm.valid">
+          Update Profile
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+
+  @if (submitted) {
+    <div class="success-box">
+      <h3>✅ Profile Updated!</h3>
+      <p><strong>Name:</strong> {{ profileForm.value.firstName }} {{ profileForm.value.lastName }}</p>
+      <p><strong>Age:</strong> {{ profileForm.value.age }}</p>
+      @if (profileForm.value.bio) {
+        <p><strong>Bio:</strong> {{ profileForm.value.bio }}</p>
+      }
+    </div>
+  }
+
+  <div class="hint-box">
+    <h4>💡 Number Validation & Character Counter:</h4>
+    <p>This form demonstrates:</p>
+    <ul>
+      <li>Number validation with min/max validators</li>
+      <li>Character counter for textarea</li>
+      <li>Optional fields (bio has no required validator)</li>
+    </ul>
+  </div>
+</div>

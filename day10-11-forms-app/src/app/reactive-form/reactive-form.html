@@ -1,0 +1,113 @@
+<div class="page-content">
+  <h2>⚛️ Day 11: Basic Reactive Form</h2>
+  <p class="intro">Learn reactive forms with FormGroup, FormControl, and Validators defined in TypeScript.</p>
+  
+  <div class="info-box">
+    <h3>🎯 What is a Reactive Form?</h3>
+    <ul>
+      <li>Form logic is defined in the <strong>component (TypeScript)</strong></li>
+      <li>Uses <code>ReactiveFormsModule</code> from <code>@angular/forms</code></li>
+      <li>Form structure created with <code>FormGroup</code> and <code>FormControl</code></li>
+      <li>More control, better for complex forms and testing</li>
+    </ul>
+  </div>
+
+  <div class="form-container">
+    <h3>User Information Form</h3>
+    
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <!-- Username Field -->
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input 
+          type="text" 
+          id="username"
+          formControlName="username"
+          [class.invalid]="username?.invalid && username?.touched"
+          [class.valid]="username?.valid && username?.touched">
+        
+        @if (username?.invalid && username?.touched) {
+          <span class="error-message">
+            @if (username?.errors?.['required']) {
+              Username is required
+            }
+            @if (username?.errors?.['minlength']) {
+              Username must be at least 3 characters
+            }
+          </span>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email"
+          formControlName="email"
+          [class.invalid]="email?.invalid && email?.touched"
+          [class.valid]="email?.valid && email?.touched">
+        
+        @if (email?.invalid && email?.touched) {
+          <span class="error-message">
+            @if (email?.errors?.['required']) {
+              Email is required
+            }
+            @if (email?.errors?.['email']) {
+              Please enter a valid email address
+            }
+          </span>
+        }
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+          Submit Form
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+
+      <!-- Form State Info -->
+      <div class="form-state">
+        <h4>Form State:</h4>
+        <ul>
+          <li>Valid: <strong>{{ userForm.valid }}</strong></li>
+          <li>Invalid: <strong>{{ userForm.invalid }}</strong></li>
+          <li>Touched: <strong>{{ userForm.touched }}</strong></li>
+          <li>Pristine: <strong>{{ userForm.pristine }}</strong></li>
+        </ul>
+        <h4>Form Value:</h4>
+        <pre><code>{{ userForm.value | json }}</code></pre>
+      </div>
+    </form>
+  </div>
+
+  @if (submitted) {
+    <div class="success-box">
+      <h3>✅ Form Submitted Successfully!</h3>
+      <p><strong>Username:</strong> {{ userForm.value.username }}</p>
+      <p><strong>Email:</strong> {{ userForm.value.email }}</p>
+    </div>
+  }
+
+  <div class="hint-box">
+    <h4>💡 Key Concepts:</h4>
+    <p><strong>1. ReactiveFormsModule:</strong> Must be imported</p>
+    <pre><code>imports: [ReactiveFormsModule]</code></pre>
+    
+    <p><strong>2. FormGroup & FormControl:</strong> Define form structure</p>
+    <pre><code>userForm = new FormGroup(&#123;
+  username: new FormControl('', [Validators.required]),
+  email: new FormControl('', [Validators.required, Validators.email])
+&#125;);</code></pre>
+    
+    <p><strong>3. formControlName:</strong> Bind input to FormControl</p>
+    <pre><code>&lt;input formControlName="username"&gt;</code></pre>
+    
+    <p><strong>4. Access Control:</strong> Get control from FormGroup</p>
+    <pre><code>this.userForm.get('username')</code></pre>
+  </div>
+</div>

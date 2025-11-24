@@ -1,0 +1,87 @@
+<div class="page-content">
+  <h2>📋 Registration Form (Reactive)</h2>
+  <p class="intro">Advanced reactive form with custom password matching validator.</p>
+  
+  <div class="form-container">
+    <h3>Create Account</h3>
+    
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username *</label>
+        <input type="text" id="username" formControlName="username"
+          [class.invalid]="username?.invalid && username?.touched">
+        @if (username?.invalid && username?.touched) {
+          <span class="error-message">
+            @if (username?.errors?.['required']) { Username is required }
+            @if (username?.errors?.['minlength']) { Must be at least 3 characters }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" formControlName="email"
+          [class.invalid]="email?.invalid && email?.touched">
+        @if (email?.invalid && email?.touched) {
+          <span class="error-message">
+            @if (email?.errors?.['required']) { Email is required }
+            @if (email?.errors?.['email']) { Invalid email format }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password *</label>
+        <input type="password" id="password" formControlName="password"
+          [class.invalid]="password?.invalid && password?.touched">
+        @if (password?.invalid && password?.touched) {
+          <span class="error-message">
+            @if (password?.errors?.['required']) { Password is required }
+            @if (password?.errors?.['minlength']) { Must be at least 6 characters }
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password *</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword"
+          [class.invalid]="(confirmPassword?.invalid && confirmPassword?.touched) || registrationForm.errors?.['passwordMismatch']">
+        @if (confirmPassword?.invalid && confirmPassword?.touched) {
+          <span class="error-message">Please confirm your password</span>
+        }
+        @if (registrationForm.errors?.['passwordMismatch'] && confirmPassword?.touched) {
+          <span class="error-message">Passwords do not match!</span>
+        }
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">
+          Register
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+    </form>
+  </div>
+
+  @if (submitted) {
+    <div class="success-box">
+      <h3>✅ Registration Successful!</h3>
+      <p><strong>Username:</strong> {{ registrationForm.value.username }}</p>
+      <p><strong>Email:</strong> {{ registrationForm.value.email }}</p>
+    </div>
+  }
+
+  <div class="hint-box">
+    <h4>💡 Custom Validator Example:</h4>
+    <p>This form uses a custom validator to ensure passwords match:</p>
+    <pre><code>passwordMatchValidator(control: AbstractControl) &#123;
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+  return password.value === confirmPassword.value 
+    ? null 
+    : &#123; passwordMismatch: true &#125;;
+&#125;</code></pre>
+  </div>
+</div>

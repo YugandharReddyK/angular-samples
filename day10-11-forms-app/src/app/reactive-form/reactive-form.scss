@@ -1,0 +1,51 @@
+.form-state {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 8px;
+
+  h4 {
+    margin: 1rem 0 0.5rem 0;
+    color: #374151;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0;
+
+    li {
+      padding: 0.5rem 0;
+      color: #6b7280;
+
+      strong {
+        color: #1f2937;
+      }
+    }
+  }
+
+  pre {
+    margin: 0.5rem 0 0 0;
+    background: #1e293b;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+  }
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+  cursor: pointer;
+
+  input[type="checkbox"] {
+    width: auto;
+    cursor: pointer;
+  }
+}

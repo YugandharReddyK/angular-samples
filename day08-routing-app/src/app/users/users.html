@@ -1,0 +1,31 @@
+<div class="page-content">
+  <h2>👥 Users List</h2>
+  <p class="intro">Click on any user to view their profile details!</p>
+  
+  <div class="info-box">
+    <h3>Day 9: Route Parameters Example</h3>
+    <ul>
+      <li>Route: <code>/users</code> shows this list</li>
+      <li>Route: <code>/user/:id</code> shows individual user details</li>
+      <li>Click any user card to navigate with their ID as a route parameter</li>
+    </ul>
+  </div>
+
+  <div class="users-grid">
+    @for (user of users; track user.id) {
+      <a [routerLink]="['/user', user.id]" class="user-card">
+        <div class="user-avatar">{{ user.avatar }}</div>
+        <div class="user-info">
+          <h3>{{ user.name }}</h3>
+          <p class="email">{{ user.email }}</p>
+          <span class="role-badge">{{ user.role }}</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    }
+  </div>
+
+  <div class="hint-box">
+    <p>💡 <strong>Try this:</strong> Click on a user, then change the ID in the URL (e.g., from <code>/user/1</code> to <code>/user/3</code>) and watch the component update!</p>
+  </div>
+</div>
