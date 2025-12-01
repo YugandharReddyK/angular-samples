@@ -1,0 +1,62 @@
+<div class="app-container">
+  
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>🌐 {{ title }}</h2>
+      <p>HTTP Client & Async Data Tutorial</p>
+    </div>
+    
+    <nav class="sidebar-menu">
+      <!-- Home -->
+      @for (item of menuItems.slice(0, 1); track item.path) {
+        <a 
+          [routerLink]="item.path" 
+          routerLinkActive="active"
+          class="menu-item">
+          <span class="icon">{{ item.icon }}</span>
+          <span class="label">{{ item.label }}</span>
+        </a>
+      }
+
+      <!-- Day 12: HTTP Client Basics -->
+      <div class="menu-section">
+        <div class="section-title">Day 12: HTTP Client</div>
+        @for (item of getItemsByCategory('Day 12'); track item.path) {
+          <a 
+            [routerLink]="item.path" 
+            routerLinkActive="active"
+            class="menu-item">
+            <span class="icon">{{ item.icon }}</span>
+            <span class="label">{{ item.label }}</span>
+          </a>
+        }
+      </div>
+
+      <!-- Day 13: Async Data & Error Handling -->
+      <div class="menu-section">
+        <div class="section-title">Day 13: Async & Errors</div>
+        @for (item of getItemsByCategory('Day 13'); track item.path) {
+          <a 
+            [routerLink]="item.path" 
+            routerLinkActive="active"
+            class="menu-item">
+            <span class="icon">{{ item.icon }}</span>
+            <span class="label">{{ item.label }}</span>
+          </a>
+        }
+      </div>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <p>Angular Training</p>
+      <small>Days 12-13</small>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="content">
+    <router-outlet />
+  </main>
+
+</div>
