@@ -1,0 +1,27 @@
+<div class="child-container">
+  <div class="message-display">
+    <h3>Message from Parent:</h3>
+    <p class="message">{{ message }}</p>
+  </div>
+
+  <button (click)="sendEventToParent()" class="btn btn-child">
+    Send Event to Parent
+  </button>
+
+  <div class="child-logs">
+    <h3>Child Component Lifecycle Logs:</h3>
+    <div class="logs-list">
+      <div *ngIf="localLogs.length === 0" class="empty">
+        Waiting for lifecycle events...
+      </div>
+      <div class="log-item" *ngFor="let log of localLogs">
+        {{ log }}
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <p><strong>DoCheck Counter:</strong> {{ checkCounter }}</p>
+    <p class="hint">Notice how ngDoCheck runs frequently during change detection</p>
+  </div>
+</div>

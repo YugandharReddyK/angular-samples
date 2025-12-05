@@ -1,0 +1,20 @@
+<header class="main-header">
+  <div class="container">
+    <h1>Angular Days 14-16</h1>
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/pipes" routerLinkActive="active">Day 14: Pipes</a>
+      <a routerLink="/lifecycle" routerLinkActive="active">Day 15: Lifecycle</a>
+      <a routerLink="/admin" routerLinkActive="active">Day 16: Admin</a>
+      <a routerLink="/user" routerLinkActive="active">Day 16: User</a>
+    </nav>
+  </div>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="main-footer">
+  <p>Angular Training Application - Days 14-16 © 2024</p>
+</footer>

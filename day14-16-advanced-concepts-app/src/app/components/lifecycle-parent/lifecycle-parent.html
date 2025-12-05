@@ -1,0 +1,93 @@
+<div class="lifecycle-container">
+  <h1>Day 15: Lifecycle Hooks Demo</h1>
+
+  <section class="control-panel">
+    <h2>Parent Component Controls</h2>
+    <div class="button-group">
+      <button (click)="toggleChild()" class="btn btn-primary">
+        {{ showChild ? 'Destroy Child' : 'Create Child' }}
+      </button>
+      <button (click)="updateMessage()" class="btn btn-secondary" [disabled]="!showChild">
+        Update Message to Child
+      </button>
+      <button (click)="clearLogs()" class="btn btn-danger">
+        Clear Logs
+      </button>
+    </div>
+    <div class="info-box">
+      <p><strong>Current Message:</strong> {{ childMessage }}</p>
+      <p><strong>Child Status:</strong> {{ showChild ? 'Active' : 'Destroyed' }}</p>
+    </div>
+  </section>
+
+  <div class="components-grid">
+    <!-- Child Component -->
+    <section class="child-section" *ngIf="showChild">
+      <h2>Child Component</h2>
+      <app-lifecycle-child 
+        [message]="childMessage"
+        (childEvent)="onChildEvent($event)">
+      </app-lifecycle-child>
+    </section>
+
+    <section class="child-section destroyed" *ngIf="!showChild">
+      <h2>Child Component</h2>
+      <div class="destroyed-message">
+        <p>Child component has been destroyed</p>
+        <p class="hint">Click "Create Child" to recreate it</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Parent Logs -->
+  <section class="logs-section">
+    <h2>Parent Component Logs</h2>
+    <div class="logs-container">
+      <div *ngIf="logs.length === 0" class="empty-logs">
+        No events logged yet. Interact with the components to see lifecycle hooks in action.
+      </div>
+      <div class="log-entry" *ngFor="let log of logs">
+        {{ log }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lifecycle Hooks Reference -->
+  <section class="reference-section">
+    <h2>Lifecycle Hooks Reference</h2>
+    <div class="hooks-grid">
+      <div class="hook-card">
+        <h3>ngOnChanges</h3>
+        <p>Called when @Input properties change</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngOnInit</h3>
+        <p>Called once after first ngOnChanges</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngDoCheck</h3>
+        <p>Called during every change detection run</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngAfterContentInit</h3>
+        <p>Called after content projection</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngAfterContentChecked</h3>
+        <p>Called after every content check</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngAfterViewInit</h3>
+        <p>Called after view initialization</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngAfterViewChecked</h3>
+        <p>Called after every view check</p>
+      </div>
+      <div class="hook-card">
+        <h3>ngOnDestroy</h3>
+        <p>Called just before component is destroyed</p>
+      </div>
+    </div>
+  </section>
+</div>

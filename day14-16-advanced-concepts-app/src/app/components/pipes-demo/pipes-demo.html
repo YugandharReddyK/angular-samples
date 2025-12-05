@@ -1,0 +1,185 @@
+<div class="pipes-demo-container">
+  <h1>Day 14: Pipes Demo</h1>
+  
+  <!-- Section 1: Built-in Pipes -->
+  <section class="demo-section">
+    <h2>1. Built-in Pipes</h2>
+    
+    <div class="pipe-example">
+      <h3>Date Pipe</h3>
+      <div class="example-row">
+        <span class="label">Default:</span>
+        <span class="result">{{ today | date }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Short Date:</span>
+        <span class="result">{{ today | date:'short' }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Full Date:</span>
+        <span class="result">{{ today | date:'fullDate' }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Custom Format:</span>
+        <span class="result">{{ today | date:'MMM dd, yyyy - hh:mm a' }}</span>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>Text Case Pipes</h3>
+      <div class="example-row">
+        <span class="label">Original:</span>
+        <span class="result">{{ name }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Uppercase:</span>
+        <span class="result">{{ name | uppercase }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Lowercase:</span>
+        <span class="result">{{ name | lowercase }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Title Case:</span>
+        <span class="result">{{ name | titlecase }}</span>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>Number Pipes</h3>
+      <div class="example-row">
+        <span class="label">Currency (USD):</span>
+        <span class="result">{{ price | currency }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Currency (EUR):</span>
+        <span class="result">{{ price | currency:'EUR' }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Decimal (2 digits):</span>
+        <span class="result">{{ price | number:'1.2-2' }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Percent:</span>
+        <span class="result">{{ rating | percent:'1.2-2' }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Large Number:</span>
+        <span class="result">{{ largeNumber | number }}</span>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>JSON Pipe</h3>
+      <div class="example-row">
+        <span class="label">User Object:</span>
+        <pre class="result">{{ user | json }}</pre>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>Slice Pipe</h3>
+      <div class="example-row">
+        <span class="label">First 3 products:</span>
+        <span class="result">{{ products | slice:0:3 | json }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Custom Pipes -->
+  <section class="demo-section">
+    <h2>2. Custom Pipes</h2>
+
+    <div class="pipe-example">
+      <h3>Filter Pipe (Search Products)</h3>
+      <div class="input-group">
+        <label>Search Products:</label>
+        <input 
+          type="text" 
+          [(ngModel)]="searchText" 
+          placeholder="Search by name or category..."
+          class="search-input">
+      </div>
+      <div class="product-list">
+        <div class="product-card" *ngFor="let product of products | filter:searchText">
+          <h4>{{ product.name }}</h4>
+          <p>Category: {{ product.category }}</p>
+          <p class="price">{{ product.price | currency }}</p>
+        </div>
+        <p *ngIf="(products | filter:searchText).length === 0" class="no-results">
+          No products found matching "{{ searchText }}"
+        </p>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>Phone Pipe (Format Phone Numbers)</h3>
+      <div class="example-row">
+        <span class="label">Raw Number:</span>
+        <span class="result">{{ phoneNumber }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Formatted:</span>
+        <span class="result">{{ phoneNumber | phone }}</span>
+      </div>
+      <div class="input-group">
+        <label>Try your own:</label>
+        <input 
+          type="text" 
+          [(ngModel)]="phoneNumber" 
+          placeholder="Enter 10-digit number"
+          class="search-input">
+        <span class="result">Formatted: {{ phoneNumber | phone }}</span>
+      </div>
+    </div>
+
+    <div class="pipe-example">
+      <h3>Highlight Pipe (Highlight Search Terms)</h3>
+      <div class="input-group">
+        <label>Search Text:</label>
+        <input 
+          type="text" 
+          [(ngModel)]="highlightSearch" 
+          placeholder="Enter text to highlight..."
+          class="search-input">
+      </div>
+      <div class="highlight-demo">
+        <p [innerHTML]="sampleText | highlight:highlightSearch"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Chaining Pipes -->
+  <section class="demo-section">
+    <h2>3. Chaining Multiple Pipes</h2>
+    
+    <div class="pipe-example">
+      <h3>Combined Transformations</h3>
+      <div class="example-row">
+        <span class="label">Name → Uppercase → Slice:</span>
+        <span class="result">{{ name | uppercase | slice:0:10 }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Price → Currency → Uppercase:</span>
+        <span class="result">{{ price | currency:'USD' | uppercase }}</span>
+      </div>
+      <div class="example-row">
+        <span class="label">Date → Date format → Uppercase:</span>
+        <span class="result">{{ today | date:'fullDate' | uppercase }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Key Learnings -->
+  <section class="demo-section key-learnings">
+    <h2>Key Learnings</h2>
+    <ul>
+      <li><strong>Built-in Pipes:</strong> Angular provides many useful pipes for common transformations (date, currency, text case, etc.)</li>
+      <li><strong>Custom Pipes:</strong> Create your own pipes for specific transformation logic using <code>@Pipe</code> decorator</li>
+      <li><strong>Pure Pipes:</strong> By default, pipes are pure and only re-run when input reference changes</li>
+      <li><strong>Pipe Chaining:</strong> Multiple pipes can be chained using the <code>|</code> operator</li>
+      <li><strong>Parameters:</strong> Pipes can accept parameters using <code>:</code> syntax</li>
+      <li><strong>Performance:</strong> Pipes are efficient as they only execute when needed</li>
+    </ul>
+  </section>
+</div>
