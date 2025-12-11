@@ -83,12 +83,6 @@ export class LifecycleChild implements
   }
 
   private log(message: string) {
-    const timestamp = new Date().toLocaleTimeString();
-    this.localLogs.push(`[${timestamp}] ${message}`);
-    
-    // Keep only last 15 logs to avoid memory issues
-    if (this.localLogs.length > 15) {
-      this.localLogs.shift();
-    }
+    console.log(message);
   }
 }
