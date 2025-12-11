@@ -1,0 +1,226 @@
+<div class="comparison-container">
+  <h1>Styling Tables: Manual vs PrimeNG</h1>
+  <p class="intro">
+    This demonstration shows the dramatic difference in complexity between building a feature-rich data table manually
+    versus using PrimeNG. Both tables display the same data with sorting, filtering, and responsive design.
+  </p>
+
+  <!-- Without PrimeNG Section -->
+  <section class="comparison-section">
+    <div class="section-header">
+      <h2>❌ Without PrimeNG (Manual Implementation)</h2>
+      <div class="code-stats">
+        <span class="stat">~200 lines of code</span>
+        <span class="stat">Manual CSS styling</span>
+        <span class="stat">Custom sorting logic</span>
+        <span class="stat">Manual filtering</span>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <div class="search-bar">
+        <input 
+          type="text" 
+          [(ngModel)]="searchText" 
+          placeholder="Search products..."
+          class="search-input"
+        />
+      </div>
+
+      <div class="table-scroll">
+        <table class="vanilla-table">
+          <thead>
+            <tr>
+              <th (click)="sortBy('id')" class="sortable">
+                ID
+                <span class="sort-icon" *ngIf="sortColumn === 'id'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('name')" class="sortable">
+                Product Name
+                <span class="sort-icon" *ngIf="sortColumn === 'name'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('category')" class="sortable">
+                Category
+                <span class="sort-icon" *ngIf="sortColumn === 'category'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('price')" class="sortable">
+                Price
+                <span class="sort-icon" *ngIf="sortColumn === 'price'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('stock')" class="sortable">
+                Stock
+                <span class="sort-icon" *ngIf="sortColumn === 'stock'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('rating')" class="sortable">
+                Rating
+                <span class="sort-icon" *ngIf="sortColumn === 'rating'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+              <th (click)="sortBy('status')" class="sortable">
+                Status
+                <span class="sort-icon" *ngIf="sortColumn === 'status'">
+                  {{ sortDirection === 'asc' ? '▲' : '▼' }}
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of filteredProducts">
+              <td data-label="ID">{{ product.id }}</td>
+              <td data-label="Product Name">{{ product.name }}</td>
+              <td data-label="Category">{{ product.category }}</td>
+              <td data-label="Price">${{ product.price }}</td>
+              <td data-label="Stock">{{ product.stock }}</td>
+              <td data-label="Rating">{{ product.rating }} ⭐</td>
+              <td data-label="Status">
+                <span [class]="'status-badge ' + getStatusClass(product.status)">
+                  {{ product.status }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-info">
+        Showing {{ filteredProducts.length }} of {{ products.length }} products
+      </div>
+    </div>
+
+    <div class="code-note">
+      💡 This requires extensive HTML structure, custom CSS for responsive design, manual TypeScript for sorting/filtering,
+      and significant maintenance effort for any new features.
+    </div>
+  </section>
+
+  <!-- With PrimeNG Section -->
+  <section class="comparison-section primeng-section">
+    <div class="section-header">
+      <h2>✅ With PrimeNG (15 Lines)</h2>
+      <div class="code-stats success">
+        <span class="stat">~15 lines of code</span>
+        <span class="stat">Pre-styled components</span>
+        <span class="stat">Built-in sorting</span>
+        <span class="stat">Built-in filtering</span>
+        <span class="stat">Pagination included</span>
+        <span class="stat">Responsive by default</span>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <p-table 
+        #dt
+        [value]="products" 
+        [paginator]="true" 
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [globalFilterFields]="['name', 'category', 'status']"
+        styleClass="p-datatable-sm p-datatable-striped"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+              <i class="pi pi-search"></i>
+              <input 
+                pInputText 
+                type="text" 
+                (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+                placeholder="Search products..." 
+              />
+            </span>
+          </div>
+        </ng-template>
+        
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="id">ID <p-sortIcon field="id"></p-sortIcon></th>
+            <th pSortableColumn="name">Product Name <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+            <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+            <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+            <th pSortableColumn="rating">Rating <p-sortIcon field="rating"></p-sortIcon></th>
+            <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+          </tr>
+        </ng-template>
+        
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>${{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.rating }} ⭐</td>
+            <td>
+              <p-tag 
+                [value]="product.status" 
+                [severity]="getStatusSeverity(product.status)"
+              ></p-tag>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="code-note success">
+      🚀 PrimeNG provides sorting, filtering, pagination, responsive design, accessibility, and theming out of the box.
+      Just declare what you want - no need to implement it yourself!
+    </div>
+  </section>
+
+  <!-- Key Takeaways -->
+  <section class="takeaways">
+    <h2>📊 Comparison Summary</h2>
+    <div class="comparison-grid">
+      <div class="comparison-item">
+        <h3>Lines of Code</h3>
+        <p class="manual">Manual: ~200 lines</p>
+        <p class="primeng">PrimeNG: ~15 lines</p>
+        <p class="savings">93% reduction ✨</p>
+      </div>
+      
+      <div class="comparison-item">
+        <h3>Features</h3>
+        <p class="manual">Manual: Basic sorting/filtering</p>
+        <p class="primeng">PrimeNG: Sorting, filtering, pagination, export, selection, lazy loading, and more</p>
+      </div>
+      
+      <div class="comparison-item">
+        <h3>Maintenance</h3>
+        <p class="manual">Manual: High - every bug fix and feature requires custom code</p>
+        <p class="primeng">PrimeNG: Low - updates handled by library maintainers</p>
+      </div>
+      
+      <div class="comparison-item">
+        <h3>Accessibility</h3>
+        <p class="manual">Manual: Must implement ARIA attributes manually</p>
+        <p class="primeng">PrimeNG: WCAG compliant out of the box</p>
+      </div>
+      
+      <div class="comparison-item">
+        <h3>Cross-browser Support</h3>
+        <p class="manual">Manual: Must test and fix issues yourself</p>
+        <p class="primeng">PrimeNG: Tested across all major browsers</p>
+      </div>
+      
+      <div class="comparison-item">
+        <h3>Theming</h3>
+        <p class="manual">Manual: Custom CSS for every variation</p>
+        <p class="primeng">PrimeNG: 30+ pre-built themes + easy customization</p>
+      </div>
+    </div>
+  </section>
+</div>

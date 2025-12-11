@@ -1,0 +1,296 @@
+.comparison-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  
+  h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+}
+
+.comparison-section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  &.primeng-section {
+    background: linear-gradient(135deg, #f5f9ff 0%, #fff 100%);
+    border: 2px solid #4CAF50;
+  }
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .code-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+    .stat {
+      background: #f44336;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    &.success .stat {
+      background: #4CAF50;
+    }
+  }
+}
+
+.table-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.search-bar {
+  margin-bottom: 1rem;
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    
+    &:focus {
+      outline: none;
+      border-color: #2196F3;
+    }
+  }
+}
+
+// Vanilla Table Styles
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.vanilla-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  
+  thead {
+    background: #2196F3;
+    color: white;
+    
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+      
+      &.sortable {
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s;
+        
+        &:hover {
+          background: #1976D2;
+        }
+      }
+      
+      .sort-icon {
+        margin-left: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+  
+  tbody {
+    tr {
+      border-bottom: 1px solid #e0e0e0;
+      transition: background 0.2s;
+      
+      &:hover {
+        background: #f5f5f5;
+      }
+      
+      td {
+        padding: 1rem;
+        
+        &[data-label] {
+          position: relative;
+        }
+      }
+    }
+  }
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  
+  &.status-in-stock {
+    background: #d4edda;
+    color: #155724;
+  }
+  
+  &.status-low-stock {
+    background: #fff3cd;
+    color: #856404;
+  }
+  
+  &.status-out-stock {
+    background: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.table-info {
+  color: #666;
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.code-note {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 1rem;
+  border-radius: 4px;
+  color: #856404;
+  line-height: 1.6;
+  
+  &.success {
+    background: #d4edda;
+    border-left-color: #28a745;
+    color: #155724;
+  }
+}
+
+// Takeaways Section
+.takeaways {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  
+  .comparison-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1.5rem;
+    
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    p {
+      margin: 0.5rem 0;
+      line-height: 1.5;
+      
+      &.manual {
+        color: #ffcccc;
+      }
+      
+      &.primeng {
+        color: #ccffcc;
+      }
+      
+      &.savings {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Responsive Design for Vanilla Table
+@media screen and (max-width: 768px) {
+  .vanilla-table {
+    thead {
+      display: none;
+    }
+    
+    tbody tr {
+      display: block;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      
+      td {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.75rem;
+        border-bottom: 1px solid #f0f0f0;
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        &[data-label]:before {
+          content: attr(data-label);
+          font-weight: bold;
+          color: #2196F3;
+        }
+      }
+    }
+  }
+  
+  .code-stats {
+    flex-direction: column;
+    
+    .stat {
+      text-align: center;
+    }
+  }
+}
+
+// PrimeNG Table Customization
+::ng-deep {
+  .p-datatable {
+    .p-datatable-header {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      padding: 1rem;
+    }
+    
+    .p-paginator {
+      background: #f8f9fa;
+    }
+  }
+}

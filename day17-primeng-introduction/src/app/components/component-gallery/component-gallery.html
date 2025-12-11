@@ -1,0 +1,266 @@
+<div class="gallery-container">
+  <h1>PrimeNG Component Gallery</h1>
+  <p class="intro">
+    Explore 15+ essential PrimeNG components organized by category. All components are pre-styled, accessible, and production-ready.
+  </p>
+
+  <p-toast></p-toast>
+
+  <!-- Buttons Section -->
+  <section class="component-category">
+    <h2>🔘 Buttons</h2>
+    <p-card>
+      <div class="button-demo">
+        <p-button label="Primary" (onClick)="showToast('info', 'Primary', 'Primary button clicked')"></p-button>
+        <p-button label="Secondary" severity="secondary" (onClick)="showToast('info', 'Secondary', 'Secondary button clicked')"></p-button>
+        <p-button label="Success" severity="success" icon="pi pi-check" (onClick)="showToast('success', 'Success', 'Operation successful!')"></p-button>
+        <p-button label="Info" severity="info" icon="pi pi-info-circle" iconPos="right"></p-button>
+        <p-button label="Warning" severity="warn" icon="pi pi-exclamation-triangle"></p-button>
+        <p-button label="Danger" severity="danger" icon="pi pi-times"></p-button>
+        <p-button label="Outlined" [outlined]="true"></p-button>
+        <p-button label="Rounded" [rounded]="true" icon="pi pi-star"></p-button>
+        <p-button icon="pi pi-search" [rounded]="true" [text]="true"></p-button>
+      </div>
+    </p-card>
+  </section>
+
+  <!-- Form Inputs Section -->
+  <section class="component-category">
+    <h2>📝 Form Inputs</h2>
+    <div class="grid">
+      <p-card header="Text Input" class="grid-item">
+        <span class="p-float-label">
+          <input pInputText id="username" [(ngModel)]="textValue" />
+          <label for="username">Username</label>
+        </span>
+        <p class="value-display">Value: {{ textValue || 'empty' }}</p>
+      </p-card>
+
+      <p-card header="Textarea" class="grid-item">
+        <textarea 
+          pInputTextarea 
+          [(ngModel)]="textareaValue" 
+          rows="3" 
+          placeholder="Enter your comment"
+        ></textarea>
+        <p class="value-display">Length: {{ textareaValue.length }}</p>
+      </p-card>
+
+      <p-card header="Dropdown" class="grid-item">
+        <select class="p-dropdown" [(ngModel)]="selectedCity">
+          <option [ngValue]="undefined">Select a City</option>
+          <option *ngFor="let city of cities" [ngValue]="city">{{ city.name }}</option>
+        </select>
+        <p class="value-display">Selected: {{ selectedCity?.name || 'none' }}</p>
+      </p-card>
+
+      <p-card header="Calendar" class="grid-item">
+        <input type="date" class="p-inputtext" [(ngModel)]="date" />
+        <p class="value-display">Date: {{ date | date:'medium' }}</p>
+      </p-card>
+    </div>
+  </section>
+
+  <!-- Checkbox & Radio Section -->
+  <section class="component-category">
+    <h2>☑️ Selection Controls</h2>
+    <div class="grid">
+      <p-card header="Checkbox" class="grid-item">
+        <div class="field-checkbox">
+          <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="accept"></p-checkbox>
+          <label for="accept">I accept the terms and conditions</label>
+        </div>
+        <p class="value-display">Checked: {{ checked }}</p>
+      </p-card>
+
+      <p-card header="Radio Buttons" class="grid-item">
+        <div class="radio-group">
+          <div class="field-radiobutton">
+            <p-radioButton 
+              name="option" 
+              value="option1" 
+              [(ngModel)]="selectedOption" 
+              inputId="option1"
+            ></p-radioButton>
+            <label for="option1">Option 1</label>
+          </div>
+          <div class="field-radiobutton">
+            <p-radioButton 
+              name="option" 
+              value="option2" 
+              [(ngModel)]="selectedOption" 
+              inputId="option2"
+            ></p-radioButton>
+            <label for="option2">Option 2</label>
+          </div>
+          <div class="field-radiobutton">
+            <p-radioButton 
+              name="option" 
+              value="option3" 
+              [(ngModel)]="selectedOption" 
+              inputId="option3"
+            ></p-radioButton>
+            <label for="option3">Option 3</label>
+          </div>
+        </div>
+        <p class="value-display">Selected: {{ selectedOption }}</p>
+      </p-card>
+    </div>
+  </section>
+
+  <!-- Panels Section -->
+  <section class="component-category">
+    <h2>📦 Panels & Containers</h2>
+    
+    <h3>Panel Component</h3>
+    <p-panel header="User Profile" [toggleable]="true">
+      <p>This is a collapsible panel with header and content area.</p>
+      <p>Click the toggle icon to collapse/expand.</p>
+    </p-panel>
+
+    <h3 style="margin-top: 2rem;">Accordion</h3>
+    <p-accordion>
+      <p-accordionPanel header="Section 1">
+        <ng-template pTemplate="content">
+          Content for section 1. Accordions allow you to show/hide related content.
+        </ng-template>
+      </p-accordionPanel>
+      <p-accordionPanel header="Section 2">
+        <ng-template pTemplate="content">
+          Content for section 2. Only one section can be open at a time (by default).
+        </ng-template>
+      </p-accordionPanel>
+      <p-accordionPanel header="Section 3">
+        <ng-template pTemplate="content">
+          Content for section 3. Great for FAQs and progressive disclosure.
+        </ng-template>
+      </p-accordionPanel>
+    </p-accordion>
+
+    <h3 style="margin-top: 2rem;">TabView (Coming Soon)</h3>
+    <p-panel header="Tab Navigation">
+      <p>TabView component will be added with proper module configuration.</p>
+      <p>This demonstrates panels as an alternative for organizing content.</p>
+    </p-panel>
+  </section>
+
+  <!-- Display Components Section -->
+  <section class="component-category">
+    <h2>🎨 Display Components</h2>
+    <div class="grid">
+      <p-card header="Chips" class="grid-item">
+        <p-chip label="Default Chip"></p-chip>
+        <p-chip label="Removable" icon="pi pi-user" [removable]="true"></p-chip>
+        <p-chip label="With Icon" icon="pi pi-star"></p-chip>
+      </p-card>
+
+      <p-card header="Tags" class="grid-item">
+        <p-tag value="New" severity="success"></p-tag>
+        <p-tag value="Sale" severity="danger" [rounded]="true"></p-tag>
+        <p-tag value="Info" severity="info" icon="pi pi-info-circle"></p-tag>
+        <p-tag value="Warning" severity="warn"></p-tag>
+      </p-card>
+
+      <p-card header="Badges & Avatars" class="grid-item">
+        <p-avatar label="U" styleClass="mr-2" size="large"></p-avatar>
+        <p-avatar icon="pi pi-user" styleClass="mr-2" [style]="{'background-color':'#2196F3', 'color': '#ffffff'}"></p-avatar>
+        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle"></p-avatar>
+        <div style="margin-top: 1rem;">
+          <i class="pi pi-bell mr-4 p-text-secondary" pBadge style="font-size: 2rem" value="2"></i>
+          <i class="pi pi-calendar mr-4 p-text-secondary" pBadge style="font-size: 2rem" [value]="'5'" severity="danger"></i>
+        </div>
+      </p-card>
+    </div>
+  </section>
+
+  <!-- Interactive Components Section -->
+  <section class="component-category">
+    <h2>🎚️ Interactive Components</h2>
+    <div class="grid">
+      <p-card header="Progress Bar" class="grid-item">
+        <p-progressBar [value]="50"></p-progressBar>
+        <p-progressBar [value]="75" [showValue]="true" styleClass="mt-3"></p-progressBar>
+      </p-card>
+
+      <p-card header="Slider" class="grid-item">
+        <p-slider [(ngModel)]="sliderValue"></p-slider>
+        <p class="value-display">Value: {{ sliderValue }}</p>
+      </p-card>
+
+      <p-card header="Rating" class="grid-item">
+        <p-rating [(ngModel)]="ratingValue"></p-rating>
+        <p class="value-display">Rating: {{ ratingValue }} / 5</p>
+      </p-card>
+
+      <p-card header="Knob" class="grid-item">
+        <p-knob [(ngModel)]="knobValue"></p-knob>
+        <p class="value-display">Value: {{ knobValue }}%</p>
+      </p-card>
+    </div>
+  </section>
+
+  <!-- Dialog Section -->
+  <section class="component-category">
+    <h2>💬 Overlays</h2>
+    <p-card>
+      <p-button label="Show Dialog" icon="pi pi-external-link" (onClick)="showDialog()"></p-button>
+      
+      <p-dialog 
+        header="Sample Dialog" 
+        [(visible)]="visible" 
+        [modal]="true" 
+        [style]="{width: '50vw'}"
+        [draggable]="false"
+        [resizable]="false"
+      >
+        <p>
+          This is a modal dialog. Dialogs are perfect for forms, confirmations, and detailed views.
+        </p>
+        <p>
+          PrimeNG provides built-in support for modal overlays, animations, and accessibility.
+        </p>
+        <ng-template pTemplate="footer">
+          <p-button label="Cancel" severity="secondary" (onClick)="visible = false"></p-button>
+          <p-button label="Save" (onClick)="visible = false; showToast('success', 'Saved', 'Changes saved successfully')"></p-button>
+        </ng-template>
+      </p-dialog>
+    </p-card>
+  </section>
+
+  <!-- Summary Section -->
+  <section class="summary">
+    <h2>✨ Component Benefits</h2>
+    <div class="benefit-grid">
+      <div class="benefit-card">
+        <i class="pi pi-palette" style="font-size: 2rem; color: #2196F3;"></i>
+        <h3>Pre-Styled</h3>
+        <p>Professional design out of the box with 30+ themes</p>
+      </div>
+      <div class="benefit-card">
+        <i class="pi pi-mobile" style="font-size: 2rem; color: #4CAF50;"></i>
+        <h3>Responsive</h3>
+        <p>Mobile-friendly components that adapt to screen sizes</p>
+      </div>
+      <div class="benefit-card">
+        <i class="pi pi-eye" style="font-size: 2rem; color: #FF9800;"></i>
+        <h3>Accessible</h3>
+        <p>WCAG compliant with keyboard navigation and ARIA attributes</p>
+      </div>
+      <div class="benefit-card">
+        <i class="pi pi-code" style="font-size: 2rem; color: #9C27B0;"></i>
+        <h3>Easy to Use</h3>
+        <p>Simple API with Angular-native implementation</p>
+      </div>
+      <div class="benefit-card">
+        <i class="pi pi-sync" style="font-size: 2rem; color: #F44336;"></i>
+        <h3>Maintained</h3>
+        <p>Regular updates, bug fixes, and new features</p>
+      </div>
+      <div class="benefit-card">
+        <i class="pi pi-book" style="font-size: 2rem; color: #00BCD4;"></i>
+        <h3>Documented</h3>
+        <p>Comprehensive documentation with live examples</p>
+      </div>
+    </div>
+  </section>
+</div>
