@@ -1,0 +1,109 @@
+<div class="inputs-container">
+  <h1>🔄 Signal Inputs & Outputs</h1>
+  <p class="subtitle">Modern component communication with signals</p>
+
+  <div class="demo-section">
+    <h3>Signal Inputs (Read-only from parent)</h3>
+    <div class="users-grid">
+      @for (user of users(); track user.name) {
+        <app-user-card 
+          [name]="user.name"
+          [email]="user.email"
+          [role]="user.role"
+          [isActive]="user.isActive"
+          (userEdit)="onUserEdit($event)"
+        />
+      }
+    </div>
+    <div class="code-block">
+      <code>// In child component
+name = input.required&lt;string>();
+email = input&lt;string>('default@example.com');
+
+// In template
+&lt;app-user-card [name]="userName" /></code>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Signal Outputs (Emit events to parent)</h3>
+    <div class="event-log">
+      <h4>Edit Events:</h4>
+      @for (log of editLog(); track $index) {
+        <div class="log-item">{{ log }}</div>
+      }
+      @empty {
+        <p class="empty-state">No events yet - click Edit on a user</p>
+      }
+    </div>
+    <div class="code-block">
+      <code>// In child component
+userEdit = output&lt;string>();
+
+// Emit event
+this.userEdit.emit(userName);
+
+// In parent template
+&lt;app-user-card (userEdit)="handleEdit($event)" /></code>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Two-Way Binding with model()</h3>
+    <div class="counter-demo">
+      <h4>Parent Counter Value: {{ counterValue() }}</h4>
+      <app-counter [(value)]="counterValue" />
+      <p class="hint">Changes in child automatically update parent!</p>
+    </div>
+    <div class="code-block">
+      <code>// In child component
+value = model&lt;number>(0);
+
+// Update from child
+this.value.update(v => v + 1);
+
+// In parent template
+&lt;app-counter [(value)]="parentValue" /></code>
+    </div>
+  </div>
+
+  <div class="comparison-table">
+    <h3>Signals vs Traditional Inputs</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Traditional @Input()</th>
+          <th>Signal input()</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Change Detection</td>
+          <td>⚠️ Manual OnPush strategy</td>
+          <td>✅ Automatic & fine-grained</td>
+        </tr>
+        <tr>
+          <td>Required Inputs</td>
+          <td>⚠️ Runtime error if missing</td>
+          <td>✅ Type-safe with input.required()</td>
+        </tr>
+        <tr>
+          <td>Default Values</td>
+          <td>⚠️ In property declaration</td>
+          <td>✅ In input() call</td>
+        </tr>
+        <tr>
+          <td>Computed Values</td>
+          <td>⚠️ Need getters or ngOnChanges</td>
+          <td>✅ Use computed() naturally</td>
+        </tr>
+        <tr>
+          <td>Performance</td>
+          <td>⚠️ Checks entire component tree</td>
+          <td>✅ Only updates affected parts</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

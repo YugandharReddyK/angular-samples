@@ -1,0 +1,88 @@
+<div class="rxjs-container">
+  <h1>🔄 RxJS Operators Demo</h1>
+  <p class="subtitle">Advanced reactive programming patterns</p>
+
+  <div class="operators-grid">
+    <div class="operator-card">
+      <h3>map & filter</h3>
+      <p>Transform and filter data streams</p>
+      <div class="demo">
+        <code>of(1,2,3,4,5).pipe(
+  map(x => x * 2),
+  filter(x => x > 5)
+)
+// Output: 6, 8, 10</code>
+      </div>
+    </div>
+
+    <div class="operator-card">
+      <h3>debounceTime</h3>
+      <p>Wait for user to stop typing</p>
+      <div class="demo">
+        <p>Used in search component - waits 300ms after typing</p>
+        <code>searchTerms.pipe(
+  debounceTime(300),
+  distinctUntilChanged()
+)</code>
+      </div>
+    </div>
+
+    <div class="operator-card">
+      <h3>switchMap</h3>
+      <p>Cancel previous requests</p>
+      <div class="demo">
+        <p>Cancels old searches when new search starts</p>
+        <code>searchTerms.pipe(
+  debounceTime(300),
+  switchMap(term => this.search(term))
+)</code>
+      </div>
+    </div>
+
+    <div class="operator-card">
+      <h3>combineLatest</h3>
+      <p>Combine multiple observables</p>
+      <div class="demo">
+        <p>Merges stock and sensor data</p>
+        <code>combineLatest([
+  stockData$,
+  sensorData$
+]).pipe(
+  map(([stocks, sensors]) => (...))
+)</code>
+      </div>
+    </div>
+
+    <div class="operator-card">
+      <h3>scan</h3>
+      <p>Accumulate values over time</p>
+      <div class="demo">
+        <p>Like Array.reduce but for streams</p>
+        <code>events$.pipe(
+  scan((acc, event) => [...acc, event], [])
+  slice(-10)
+)</code>
+      </div>
+    </div>
+
+    <div class="operator-card">
+      <h3>shareReplay</h3>
+      <p>Share subscription & cache value</p>
+      <div class="demo">
+        <p>Multiple subscribers share one stream</p>
+        <code>data$.pipe(
+  shareReplay(1)
+)
+// Prevents multiple API calls</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="links-section">
+    <h3>Try These Examples:</h3>
+    <div class="link-buttons">
+      <a routerLink="/search-demo" class="link-btn">🔍 Search with debounceTime</a>
+      <a routerLink="/real-time-data" class="link-btn">📡 combineLatest & scan</a>
+    </div>
+  </div>
+</div>

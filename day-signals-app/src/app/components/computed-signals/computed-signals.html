@@ -1,0 +1,127 @@
+<div class="computed-container">
+  <h1>🚀 Computed Signals</h1>
+  <p class="subtitle">Derived values that update automatically</p>
+
+  <div class="demo-grid">
+    <!-- Name Composition -->
+    <div class="demo-card">
+      <h3>Name Composition</h3>
+      <div class="name-inputs">
+        <input 
+          type="text" 
+          [value]="firstName()" 
+          (input)="updateFirstName($any($event.target).value)"
+          placeholder="First name"
+        />
+        <input 
+          type="text" 
+          [value]="lastName()" 
+          (input)="updateLastName($any($event.target).value)"
+          placeholder="Last name"
+        />
+      </div>
+      <div class="result">
+        <strong>Full Name:</strong> {{ fullName() }}
+      </div>
+      <div class="code-block">
+        <code>fullName = computed(() => 
+  `$&#123;firstName()&#125; $&#123;lastName()&#125;`
+);</code>
+      </div>
+    </div>
+
+    <!-- Price Calculator -->
+    <div class="demo-card">
+      <h3>Price Calculator</h3>
+      <div class="calculator">
+        <label>
+          Quantity: {{ quantity() }}
+          <input 
+            type="range" 
+            min="0" 
+            max="20" 
+            [value]="quantity()" 
+            (input)="quantity.set(+$any($event.target).value)"
+          />
+        </label>
+        <label>
+          Price: ${{ price() }}
+          <input 
+            type="range" 
+            min="0" 
+            max="100" 
+            step="0.01" 
+            [value]="price()" 
+            (input)="updatePrice(+$any($event.target).value)"
+          />
+        </label>
+      </div>
+      <div class="result">
+        <strong>Total:</strong> {{ formattedTotal() }}
+      </div>
+      <div class="code-block">
+        <code>total = computed(() => 
+  quantity() * price()
+);</code>
+      </div>
+    </div>
+
+    <!-- Shopping Cart -->
+    <div class="demo-card full-width">
+      <h3>🛒 Shopping Cart Calculations</h3>
+      <div class="cart-items">
+        @for (item of cartItems(); track item.id) {
+          <div class="cart-item">
+            <span class="name">{{ item.name }}</span>
+            <span class="price">${{ item.price.toFixed(2) }}</span>
+            <div class="quantity-controls">
+              <button (click)="updateItemQuantity(item.id, item.quantity - 1)">-</button>
+              <span>{{ item.quantity }}</span>
+              <button (click)="updateItemQuantity(item.id, item.quantity + 1)">+</button>
+            </div>
+            <span class="subtotal">${{ (item.price * item.quantity).toFixed(2) }}</span>
+            <button (click)="removeCartItem(item.id)" class="remove">×</button>
+          </div>
+        }
+      </div>
+      
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>Items:</span>
+          <span>{{ cartSummary().itemCount }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span>${{ cartSummary().subtotal.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row">
+          <span>Tax (10%):</span>
+          <span>${{ cartSummary().tax.toFixed(2) }}</span>
+        </div>
+        <div class="summary-row total">
+          <strong>Total:</strong>
+          <strong>${{ cartSummary().total.toFixed(2) }}</strong>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <code>cartTotal = computed(() => 
+  cartItems().reduce((sum, item) => 
+    sum + (item.price * item.quantity), 0
+  )
+);</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>📚 Key Benefits</h3>
+    <ul>
+      <li><strong>Automatic updates</strong> - Recomputes when dependencies change</li>
+      <li><strong>Memoization</strong> - Only recalculates when needed</li>
+      <li><strong>Composable</strong> - Computed signals can depend on other computed signals</li>
+      <li><strong>Lazy evaluation</strong> - Only runs when value is read</li>
+      <li><strong>No manual subscriptions</strong> - Unlike RxJS, no need to unsubscribe</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="form-validator-container">
+  <h1>✅ Async Form Validation</h1>
+  <p class="subtitle">Custom validators with RxJS</p>
+
+  <div class="form-card">
+    <h3>User Registration</h3>
+    <p>Demonstrates async validation using observables</p>
+
+    <form>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+          type="text" 
+          id="username" 
+          placeholder="Enter username"
+        />
+        <small>Checking availability in real-time...</small>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          placeholder="Enter email"
+        />
+        <small>Validates email format and domain</small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          placeholder="Enter password"
+        />
+        <small>Checks password strength asynchronously</small>
+      </div>
+    </form>
+  </div>
+
+  <div class="info-box">
+    <h3>💡 Async Validator Pattern</h3>
+    <p>Async validators return observables that emit validation results:</p>
+
+    <div class="code-example">
+      <h4>Custom Async Validator:</h4>
+      <pre><code>usernameValidator(): AsyncValidatorFn &#123;
+  return (control: AbstractControl): Observable&lt;ValidationErrors | null> => &#123;
+    return of(control.value).pipe(
+      debounceTime(500),
+      switchMap(username => this.checkUsername(username)),
+      map(exists => exists ? &#123; usernameTaken: true &#125; : null),
+      catchError(() => of(null))
+    );
+  &#125;;
+&#125;</code></pre>
+    </div>
+
+    <h4>Benefits:</h4>
+    <ul>
+      <li>✅ Validates against server without blocking UI</li>
+      <li>✅ Debounces to reduce API calls</li>
+      <li>✅ Cancels previous requests with switchMap</li>
+      <li>✅ Graceful error handling</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="effect-container">
+  <h1>🎯 Effects Demo</h1>
+  <p class="subtitle">Side effects that run automatically when signals change</p>
+
+  <div class="demo-grid">
+    <div class="demo-card">
+      <h3>Counter with Effect</h3>
+      <div class="counter-display">
+        <h2>{{ count() }}</h2>
+      </div>
+      <div class="button-group">
+        <button (click)="decrement()">-</button>
+        <button (click)="increment()">+</button>
+      </div>
+      <p class="hint">Check the logs below - effect() logs every change</p>
+      <div class="code-block">
+        <code>effect(() => &#123;
+  console.log('Count:', count());
+&#125;);</code>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <h3>Search Effect</h3>
+      <input 
+        type="text" 
+        [value]="searchTerm()" 
+        (input)="updateSearch($any($event.target).value)"
+        placeholder="Search..."
+        class="search-input"
+      />
+      <p class="hint">Effect logs each search term</p>
+      <div class="code-block">
+        <code>effect(() => &#123;
+  if (searchTerm()) &#123;
+    console.log('Search:', searchTerm());
+  &#125;
+&#125;);</code>
+      </div>
+    </div>
+
+    <div class="demo-card full-width">
+      <h3>Auto-Save Form</h3>
+      <div class="auto-save-toggle">
+        <label>
+          <input 
+            type="checkbox" 
+            [checked]="autoSaveEnabled()" 
+            (change)="toggleAutoSave()"
+          />
+          Auto-save {{ autoSaveEnabled() ? 'enabled' : 'disabled' }}
+        </label>
+      </div>
+      <div class="form-inputs">
+        <input 
+          type="text" 
+          [value]="formData().name" 
+          (input)="updateFormName($any($event.target).value)"
+          placeholder="Name"
+        />
+        <input 
+          type="email" 
+          [value]="formData().email" 
+          (input)="updateFormEmail($any($event.target).value)"
+          placeholder="Email"
+        />
+      </div>
+      <p class="hint">Effect simulates auto-saving when enabled</p>
+      <div class="code-block">
+        <code>effect(() => &#123;
+  if (autoSaveEnabled() && formData()) &#123;
+    console.log('Auto-saving:', formData());
+  &#125;
+&#125;);</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="logs-panel">
+    <div class="logs-header">
+      <h3>📜 Effect Logs</h3>
+      <button (click)="clearLogs()" class="clear-btn">Clear</button>
+    </div>
+    <div class="logs-content">
+      @for (log of logs(); track $index) {
+        <div class="log-entry">{{ log }}</div>
+      }
+      @empty {
+        <p class="empty-state">No logs yet</p>
+      }
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>📚 When to Use Effects</h3>
+    <ul>
+      <li><strong>Logging</strong> - Track signal changes for debugging</li>
+      <li><strong>Local Storage</strong> - Persist state automatically</li>
+      <li><strong>Analytics</strong> - Send tracking events on changes</li>
+      <li><strong>Synchronization</strong> - Keep external systems in sync</li>
+      <li><strong>Side effects</strong> - Any operation outside your component</li>
+    </ul>
+    <p><strong>Note:</strong> Don't use effects for deriving values - use computed() instead!</p>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="search-container">
+  <h1>🔍 Search Demo</h1>
+  <p class="subtitle">debounceTime + switchMap + distinctUntilChanged</p>
+
+  <div class="search-card">
+    <div class="search-box">
+      <input 
+        type="text" 
+        placeholder="Search for items..."
+        (input)="search($event)"
+        class="search-input"
+      />
+      @if (loading$ | async) {
+        <span class="loading-spinner">⏳</span>
+      }
+    </div>
+
+    <div class="results">
+      @if (results$ | async; as results) {
+        @if (results.length > 0) {
+          <ul class="results-list">
+            @for (result of results; track result.id) {
+              <li class="result-item">
+                <strong>{{ result.title }}</strong>
+                <p>{{ result.description }}</p>
+                <span class="category">{{ result.category }}</span>
+              </li>
+            }
+          </ul>
+        } @else {
+          <div class="no-results">No results found</div>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>💡 How It Works</h3>
+    <ol>
+      <li><strong>debounceTime(300)</strong> - Waits 300ms after user stops typing</li>
+      <li><strong>distinctUntilChanged()</strong> - Ignores duplicate searches</li>
+      <li><strong>switchMap</strong> - Cancels previous search if new one starts</li>
+      <li><strong>shareReplay(1)</strong> - Shares results across multiple subscribers</li>
+    </ol>
+
+    <div class="code-example">
+      <h4>Implementation:</h4>
+      <pre><code>results$ = searchTerms.pipe(
+  debounceTime(300),
+  distinctUntilChanged(),
+  switchMap(term => this.searchService.search(term)),
+  shareReplay(1)
+);</code></pre>
+    </div>
+  </div>
+</div>

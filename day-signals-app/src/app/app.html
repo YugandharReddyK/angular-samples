@@ -1,0 +1,24 @@
+﻿@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/" class="brand-link">
+      <span class="icon"></span>
+      <span class="title">{{ title }}</span>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a routerLink="/basic-signals" routerLinkActive="active">Basics</a>
+    <a routerLink="/computed-signals" routerLinkActive="active">Computed</a>
+    <a routerLink="/effect-demo" routerLinkActive="active">Effects</a>
+    <a routerLink="/signal-inputs" routerLinkActive="active">Inputs</a>
+    <a routerLink="/comparison" routerLinkActive="active">Compare</a>
+    <a routerLink="/counter-demo" routerLinkActive="active">Counter</a>
+    <a routerLink="/todo-list" routerLinkActive="active">Todo</a>
+    <a routerLink="/shopping-cart" routerLinkActive="active">Cart</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>
+

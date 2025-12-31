@@ -1,0 +1,77 @@
+<div class="counter-container">
+  <h1>🔢 Counter Demo</h1>
+  <p class="subtitle">Interactive counter with computed signals</p>
+
+  <div class="counter-main">
+    <div class="display">
+      <h2 class="count" [class.positive]="isPositive()" [class.negative]="!isPositive() && count() !== 0">
+        {{ count() }}
+      </h2>
+      <p class="summary">{{ summary() }}</p>
+    </div>
+
+    <div class="controls">
+      <div class="step-selector">
+        <label>Step Size:</label>
+        <div class="step-buttons">
+          <button [class.active]="step() === 1" (click)="setStep(1)">1</button>
+          <button [class.active]="step() === 5" (click)="setStep(5)">5</button>
+          <button [class.active]="step() === 10" (click)="setStep(10)">10</button>
+        </div>
+      </div>
+
+      <div class="main-buttons">
+        <button (click)="decrement()" class="decrement">- {{ step() }}</button>
+        <button (click)="reset()" class="reset">Reset</button>
+        <button (click)="increment()" class="increment">+ {{ step() }}</button>
+      </div>
+    </div>
+
+    <div class="computed-values">
+      <div class="value-card">
+        <span class="label">Doubled:</span>
+        <span class="value">{{ doubled() }}</span>
+      </div>
+      <div class="value-card">
+        <span class="label">Type:</span>
+        <span class="value">{{ isEven() ? 'Even' : 'Odd' }}</span>
+      </div>
+      <div class="value-card">
+        <span class="label">Sign:</span>
+        <span class="value">
+          {{ isPositive() ? 'Positive' : count() < 0 ? 'Negative' : 'Zero' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="history">
+      <h3>History (last 10 values)</h3>
+      <div class="history-list">
+        @for (value of history(); track $index) {
+          <span class="history-item">{{ value }}</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="code-section">
+    <h3>Implementation</h3>
+    <pre><code>count = signal(0);
+step = signal(1);
+
+// Computed signals automatically update
+doubled = computed(() => count() * 2);
+isEven = computed(() => count() % 2 === 0);
+isPositive = computed(() => count() > 0);
+
+summary = computed(() => &#123;
+  const type = isEven() ? 'even' : 'odd';
+  const sign = isPositive() ? 'positive' : 'negative';
+  return `$&#123;count()&#125; is $&#123;type&#125; and $&#123;sign&#125;`;
+&#125;);
+
+increment() &#123;
+  count.update(c => c + step());
+&#125;</code></pre>
+  </div>
+</div>

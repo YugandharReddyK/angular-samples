@@ -1,0 +1,20 @@
+﻿@if (authService.isAuthenticated()) {
+  <nav class="navbar">
+    <div class="nav-brand">
+      <h1> {{ title }}</h1>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/admin" routerLinkActive="active">Admin</a>
+      <a routerLink="/rxjs-operators" routerLinkActive="active">RxJS</a>
+      <a routerLink="/search-demo" routerLinkActive="active">Search</a>
+      <a routerLink="/real-time-data" routerLinkActive="active">Real-Time</a>
+      <a routerLink="/form-validator" routerLinkActive="active">Forms</a>
+    </div>
+  </nav>
+}
+
+<main>
+  <router-outlet />
+</main>

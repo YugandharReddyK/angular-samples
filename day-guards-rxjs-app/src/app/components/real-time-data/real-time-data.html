@@ -1,0 +1,92 @@
+<div class="realtime-container">
+  <h1>📡 Real-Time Data Streams</h1>
+  <p class="subtitle">interval + combineLatest + scan + shareReplay</p>
+
+  <div class="data-grid">
+    <div class="data-card stock-card">
+      <h3>💹 Stock Prices</h3>
+      <p class="update-info">Updates every 2 seconds</p>
+      @if (stockData$ | async; as stocks) {
+        <table>
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Price</th>
+              <th>Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (stock of stocks; track stock.symbol) {
+              <tr>
+                <td><strong>{{ stock.symbol }}</strong></td>
+                <td>${{ stock.price.toFixed(2) }}</td>
+                <td [class]="stock.change >= 0 ? 'positive' : 'negative'">
+                  {{ stock.change >= 0 ? '+' : '' }}{{ stock.change.toFixed(2) }}%
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    </div>
+
+    <div class="data-card sensor-card">
+      <h3>🌡️ Sensor Data</h3>
+      <p class="update-info">Updates every 1 second</p>
+      @if (sensorData$ | async; as sensors) {
+        <div class="sensor-readings">
+          <div class="reading">
+            <span class="label">Temperature:</span>
+            <span class="value">{{ sensors.temperature.toFixed(1) }}°C</span>
+          </div>
+          <div class="reading">
+            <span class="label">Humidity:</span>
+            <span class="value">{{ sensors.humidity.toFixed(0) }}%</span>
+          </div>
+          <div class="reading">
+            <span class="label">Pressure:</span>
+            <span class="value">{{ sensors.pressure.toFixed(1) }} hPa</span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="data-card events-card">
+      <h3>📋 Event Log</h3>
+      <p class="update-info">Last 10 events (scan accumulator)</p>
+      @if (eventLog$ | async; as events) {
+        <ul class="event-list">
+          @for (event of events; track event.timestamp) {
+            <li class="event-item">
+              <span class="timestamp">{{ event.timestamp | date:'HH:mm:ss' }}</span>
+              <span class="message">{{ event.message }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+
+    <div class="data-card combined-card">
+      <h3>🔄 Combined Data</h3>
+      <p class="update-info">combineLatest merging all streams</p>
+      @if (combinedData$ | async; as combined) {
+        <div class="combined-display">
+          <p><strong>Latest Stock:</strong> {{ combined.latestStock?.symbol }} ${{ combined.latestStock ? combined.latestStock.price.toFixed(2) : '0.00' }}</p>
+          <p><strong>Temperature:</strong> {{ combined.sensors.temperature.toFixed(1) }}°C</p>
+          <p><strong>Events Count:</strong> {{ combined.eventCount }}</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>💡 RxJS Operators Used</h3>
+    <ul>
+      <li><strong>interval()</strong> - Emits values at regular intervals</li>
+      <li><strong>combineLatest()</strong> - Waits for all observables to emit, then combines</li>
+      <li><strong>scan()</strong> - Accumulates events like Array.reduce</li>
+      <li><strong>shareReplay(1)</strong> - Shares subscription and caches last value</li>
+      <li><strong>map()</strong> - Transforms data</li>
+    </ul>
+  </div>
+</div>

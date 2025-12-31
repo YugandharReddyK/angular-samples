@@ -1,0 +1,96 @@
+<div class="signals-container">
+  <h1>💡 Basic Signals</h1>
+  <p class="subtitle">Introduction to signal(), set(), and update()</p>
+
+  <div class="demo-grid">
+    <!-- Counter Demo -->
+    <div class="demo-card">
+      <h3>Counter Signal</h3>
+      <div class="counter-display">
+        <h2>{{ count() }}</h2>
+      </div>
+      <div class="button-group">
+        <button (click)="decrement()">- Decrement</button>
+        <button (click)="increment()">+ Increment</button>
+        <button (click)="reset()" class="secondary">Reset</button>
+      </div>
+      <div class="code-block">
+        <code>count = signal(0);
+count.update(v => v + 1);</code>
+      </div>
+    </div>
+
+    <!-- Message Signal -->
+    <div class="demo-card">
+      <h3>String Signal</h3>
+      <div class="message-display">
+        <p>{{ message() }}</p>
+      </div>
+      <input 
+        type="text" 
+        [value]="message()" 
+        (input)="updateMessage($any($event.target).value)"
+        placeholder="Type a message"
+      />
+      <div class="code-block">
+        <code>message = signal('Hello!');
+message.set(newValue);</code>
+      </div>
+    </div>
+
+    <!-- Boolean Signal -->
+    <div class="demo-card">
+      <h3>Boolean Signal</h3>
+      <div class="status-display" [class.active]="isActive()">
+        <span>Status: {{ isActive() ? 'Active' : 'Inactive' }}</span>
+      </div>
+      <button (click)="toggleActive()">
+        {{ isActive() ? 'Deactivate' : 'Activate' }}
+      </button>
+      <div class="code-block">
+        <code>isActive = signal(false);
+isActive.update(v => !v);</code>
+      </div>
+    </div>
+
+    <!-- Array Signal -->
+    <div class="demo-card full-width">
+      <h3>Array Signal</h3>
+      <div class="items-list">
+        @for (item of items(); track item) {
+          <div class="item">
+            <span>{{ item }}</span>
+            <button (click)="removeItem($index)" class="remove">×</button>
+          </div>
+        }
+        @empty {
+          <p class="empty-state">No items yet</p>
+        }
+      </div>
+      <div class="add-item">
+        <input 
+          #newItem
+          type="text" 
+          placeholder="Add item"
+          (keyup.enter)="addItem(newItem.value); newItem.value=''"
+        />
+        <button (click)="addItem(newItem.value); newItem.value=''">Add</button>
+      </div>
+      <div class="code-block">
+        <code>items = signal&lt;string[]>([]);
+items.update(arr => [...arr, newItem]);</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>📚 Key Concepts</h3>
+    <ul>
+      <li><strong>signal(initialValue)</strong> - Creates a reactive signal</li>
+      <li><strong>.set(value)</strong> - Replaces the signal value</li>
+      <li><strong>.update(fn)</strong> - Updates based on previous value</li>
+      <li><strong>signal()</strong> - Read the current value</li>
+      <li><strong>Automatic tracking</strong> - Templates auto-update when signals change</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="admin-container">
+  <h1>⚙️ Admin Panel</h1>
+  <p class="subtitle">Protected by adminGuard - Admin role required</p>
+
+  <div class="admin-card">
+    <h2>🎉 Access Granted!</h2>
+    <p>You have successfully accessed the admin panel because you have the <strong>admin</strong> role.</p>
+
+    <div class="guard-explanation">
+      <h3>How the adminGuard Works:</h3>
+      <ol>
+        <li>Checks if user is authenticated</li>
+        <li>Checks if user has 'admin' role</li>
+        <li>Denies access and redirects if not admin</li>
+        <li>Allows access only for admin users</li>
+      </ol>
+    </div>
+
+    <div class="code-example">
+      <h3>Guard Implementation:</h3>
+      <pre><code>export const adminGuard: CanActivateFn = (route, state) => &#123;
+  const authService = inject(Auth);
+  const router = inject(Router);
+
+  if (!authService.isAuthenticated()) &#123;
+    router.navigate(['/login']);
+    return false;
+  &#125;
+
+  if (authService.hasRole('admin')) &#123;
+    return true;
+  &#125;
+
+  alert('Access denied: Admin privileges required');
+  router.navigate(['/dashboard']);
+  return false;
+&#125;;</code></pre>
+    </div>
+
+    <div class="test-section">
+      <h3>Test Other Roles:</h3>
+      <p>Logout and login with 'user' or 'guest' to see access denied!</p>
+    </div>
+  </div>
+</div>

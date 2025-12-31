@@ -1,0 +1,67 @@
+<div class="home-container">
+  <div class="hero">
+    <h1>⚡ {{ title }}</h1>
+    <p class="subtitle">Modern Reactive State Management</p>
+    <p class="description">
+      Learn Angular's revolutionary Signals API - a simpler, more performant way to manage reactive state.
+      Signals provide fine-grained reactivity without the complexity of RxJS observables.
+    </p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="icon">💡</div>
+      <h3>Simple & Intuitive</h3>
+      <p>Easy to learn and use - just signal(), computed(), and effect()</p>
+      <a routerLink="/basic-signals" class="btn">Basic Signals →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">🚀</div>
+      <h3>High Performance</h3>
+      <p>Fine-grained reactivity updates only what changed</p>
+      <a routerLink="/computed-signals" class="btn">Computed Signals →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">🎯</div>
+      <h3>Powerful Effects</h3>
+      <p>Run side effects automatically when signals change</p>
+      <a routerLink="/effect-demo" class="btn">Effects Demo →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">🔄</div>
+      <h3>Signal Inputs</h3>
+      <p>Modern component inputs with automatic change detection</p>
+      <a routerLink="/signal-inputs" class="btn">Signal I/O →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">⚖️</div>
+      <h3>Signals vs RxJS</h3>
+      <p>Compare Signals with traditional BehaviorSubject approach</p>
+      <a routerLink="/comparison" class="btn">Comparison →</a>
+    </div>
+
+    <div class="feature-card">
+      <div class="icon">📝</div>
+      <h3>Practical Examples</h3>
+      <p>Real-world demos: Counter, Todo List, Shopping Cart</p>
+      <a routerLink="/todo-list" class="btn">See Demos →</a>
+    </div>
+  </div>
+
+  <div class="code-example">
+    <h3>Quick Example</h3>
+    <pre><code>// Create a signal
+const count = signal(0);
+
+// Create a computed signal
+const doubled = computed(() => count() * 2);
+
+// Update the signal
+count.set(5);  // doubled is now 10
+count.update(c => c + 1);  // doubled is now 12</code></pre>
+  </div>
+</div>

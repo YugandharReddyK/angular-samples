@@ -1,0 +1,87 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h1>📊 Dashboard</h1>
+    @if (currentUser$ | async; as user) {
+      <div class="user-info">
+        <span class="username">{{ user.username }}</span>
+        <span class="role" [class]="'role-' + user.role">{{ user.role }}</span>
+        <button (click)="logout()" class="logout-btn">Logout</button>
+      </div>
+    }
+  </div>
+
+  @if (currentUser$ | async; as user) {
+    <div class="content">
+      <div class="welcome-card">
+        <h2>Welcome, {{ user.username }}! 👋</h2>
+        <p>You are logged in as: <strong>{{ user.role }}</strong></p>
+        <p>Email: {{ user.email }}</p>
+        <p>Permissions: {{ user.permissions.join(', ') }}</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>🛡️ Guards Demo</h3>
+          <p>Protected routes based on authentication and authorization</p>
+          <div class="links">
+            <a routerLink="/profile">Profile (Auth Required)</a>
+            <a routerLink="/admin">Admin Panel (Admin Role)</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>🔄 RxJS Operators</h3>
+          <p>Advanced reactive programming patterns</p>
+          <div class="links">
+            <a routerLink="/rxjs-operators">View Operators</a>
+            <a routerLink="/search-demo">Search with debounceTime</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>📡 Real-Time Data</h3>
+          <p>Live data streams using observables</p>
+          <div class="links">
+            <a routerLink="/real-time-data">Stock & Sensor Data</a>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <h3>✅ Form Validation</h3>
+          <p>Async validators with RxJS</p>
+          <div class="links">
+            <a routerLink="/form-validator">Custom Validators</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="guard-info">
+        <h3>Guard Protection Status</h3>
+        <table>
+          <tr>
+            <th>Route</th>
+            <th>Guard</th>
+            <th>Your Access</th>
+          </tr>
+          <tr>
+            <td>/dashboard</td>
+            <td>authGuard</td>
+            <td class="access-granted">✓ Granted</td>
+          </tr>
+          <tr>
+            <td>/profile</td>
+            <td>authGuard + unsavedChangesGuard</td>
+            <td class="access-granted">✓ Granted</td>
+          </tr>
+          <tr>
+            <td>/admin</td>
+            <td>adminGuard</td>
+            <td [class]="user.role === 'admin' ? 'access-granted' : 'access-denied'">
+              {{ user.role === 'admin' ? '✓ Granted' : '✗ Denied' }}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,76 @@
+<div class="profile-container">
+  <h1>👤 Profile Editor</h1>
+  <p class="subtitle">Protected by unsavedChangesGuard</p>
+
+  @if (user) {
+    <div class="profile-card">
+      <div class="user-header">
+        <div class="avatar">{{ user.username.charAt(0).toUpperCase() }}</div>
+        <div>
+          <h2>{{ user.username }}</h2>
+          <p>{{ user.email }}</p>
+          <span class="badge">{{ user.role }}</span>
+        </div>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea 
+            id="bio" 
+            [(ngModel)]="bio" 
+            name="bio"
+            (ngModelChange)="onFormChange()"
+            rows="4"
+            placeholder="Tell us about yourself..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            [(ngModel)]="phone" 
+            name="phone"
+            (ngModelChange)="onFormChange()"
+            placeholder="+1 (555) 123-4567"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input 
+            type="text" 
+            id="location" 
+            [(ngModel)]="location" 
+            name="location"
+            (ngModelChange)="onFormChange()"
+            placeholder="City, Country"
+          />
+        </div>
+
+        @if (isDirty) {
+          <div class="unsaved-warning">
+            ⚠️ You have unsaved changes
+          </div>
+        }
+
+        <button type="button" (click)="save()" [disabled]="!isDirty">
+          Save Changes
+        </button>
+      </form>
+
+      <div class="info-box">
+        <h3>🛡️ Guard Demo</h3>
+        <p>Try to navigate away without saving. The <code>unsavedChangesGuard</code> will ask for confirmation!</p>
+        <ul>
+          <li>Make changes to any field</li>
+          <li>Try clicking a nav link</li>
+          <li>Guard will prompt before navigating</li>
+          <li>Save to clear the dirty state</li>
+        </ul>
+      </div>
+    </div>
+  }
+</div>

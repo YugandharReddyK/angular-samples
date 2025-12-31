@@ -1,0 +1,158 @@
+<div class="comparison-container">
+  <h1>⚖️ Signals vs BehaviorSubject</h1>
+  <p class="subtitle">See the difference in syntax and performance</p>
+
+  <div class="comparison-grid">
+    <!-- Signals Side -->
+    <div class="approach-panel signals">
+      <h2>⚡ Signals Approach</h2>
+      
+      <div class="demo">
+        <h3>Counter: {{ signalCount() }}</h3>
+        <button (click)="incrementSignal()">Increment</button>
+        <p class="computed">Doubled: {{ signalDoubled() }}</p>
+      </div>
+
+      <div class="demo">
+        <h3>Greeting</h3>
+        <input 
+          type="text" 
+          [value]="signalName()" 
+          (input)="updateSignalName($any($event.target).value)"
+        />
+        <p class="computed">{{ signalGreeting() }}</p>
+      </div>
+
+      <div class="code-example">
+        <h4>Code:</h4>
+        <pre><code>// Create signals
+count = signal(0);
+name = signal('Angular');
+
+// Computed values
+doubled = computed(() => count() * 2);
+greeting = computed(() => `Hello, $&#123;name()&#125;!`);
+
+// Update
+count.update(c => c + 1);
+name.set(newValue);</code></pre>
+      </div>
+
+      <div class="pros">
+        <h4>✅ Advantages:</h4>
+        <ul>
+          <li>Simpler syntax</li>
+          <li>No subscriptions needed</li>
+          <li>No memory leaks</li>
+          <li>Fine-grained updates</li>
+          <li>Better performance</li>
+          <li>Type-safe by default</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RxJS Side -->
+    <div class="approach-panel rxjs">
+      <h2>🔄 RxJS BehaviorSubject</h2>
+      
+      <div class="demo">
+        <h3>Counter: {{ behaviorCount$ | async }}</h3>
+        <button (click)="incrementBehavior()">Increment</button>
+        <p class="computed">Doubled: {{ behaviorDoubled$ | async }}</p>
+      </div>
+
+      <div class="demo">
+        <h3>Greeting</h3>
+        <input 
+          type="text" 
+          [value]="behaviorName$ | async" 
+          (input)="updateBehaviorName($any($event.target).value)"
+        />
+        <p class="computed">{{ behaviorGreeting$ | async }}</p>
+      </div>
+
+      <div class="code-example">
+        <h4>Code:</h4>
+        <pre><code>// Create subjects
+count$ = new BehaviorSubject(0);
+name$ = new BehaviorSubject('Angular');
+
+// Derived observables
+doubled$ = count$.pipe(
+  map(c => c * 2)
+);
+greeting$ = name$.pipe(
+  map(n => `Hello, $&#123;n&#125;!`)
+);
+
+// Update
+count$.next(count$.value + 1);
+name$.next(newValue);
+
+// Don't forget async pipe!
+{{ '{' }}{{ '{' }} count$ | async {{ '}' }}{{ '}' }}</code></pre>
+      </div>
+
+      <div class="cons">
+        <h4>⚠️ Considerations:</h4>
+        <ul>
+          <li>More verbose syntax</li>
+          <li>Need async pipe or subscribe()</li>
+          <li>Manual unsubscribe required</li>
+          <li>Potential memory leaks</li>
+          <li>Runs change detection more often</li>
+          <li>Steeper learning curve</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="performance-section">
+    <h2>📈 Performance Comparison</h2>
+    <div class="perf-tests">
+      <div class="test">
+        <h3>Signals</h3>
+        <button (click)="performSignalOperations()">Run 10,000 Updates</button>
+        @if (signalOperations() > 0) {
+          <p class="result">Time: {{ signalOperations().toFixed(2) }}ms</p>
+        }
+      </div>
+      <div class="test">
+        <h3>BehaviorSubject</h3>
+        <button (click)="performBehaviorOperations()">Run 10,000 Updates</button>
+        @if (behaviorOperations() > 0) {
+          <p class="result">Time: {{ behaviorOperations().toFixed(2) }}ms</p>
+        }
+      </div>
+    </div>
+    <p class="note">Note: Signals are typically 2-5x faster due to fine-grained reactivity</p>
+  </div>
+
+  <div class="when-to-use">
+    <h2>🤔 When to Use Each?</h2>
+    <div class="use-cases">
+      <div class="use-case signals">
+        <h3>Use Signals For:</h3>
+        <ul>
+          <li>Component state</li>
+          <li>Computed values</li>
+          <li>Form controls</li>
+          <li>UI interactions</li>
+          <li>Synchronous updates</li>
+          <li>New Angular code</li>
+        </ul>
+      </div>
+      <div class="use-case rxjs">
+        <h3>Use RxJS For:</h3>
+        <ul>
+          <li>HTTP requests</li>
+          <li>WebSocket streams</li>
+          <li>Complex async flows</li>
+          <li>Time-based operations</li>
+          <li>Event composition</li>
+          <li>Existing RxJS code</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

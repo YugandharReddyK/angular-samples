@@ -1,0 +1,145 @@
+.basic-signals-container {
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .demo-card {
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      color: #667eea;
+      margin-bottom: 1.5rem;
+    }
+
+    .counter-display {
+      text-align: center;
+      margin: 2rem 0;
+
+      h2 {
+        font-size: 4rem;
+        color: #667eea;
+        margin: 0;
+      }
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+
+        &:focus {
+          outline: none;
+          border-color: #667eea;
+        }
+      }
+
+      p {
+        margin-top: 0.5rem;
+        color: #666;
+      }
+    }
+
+    .toggle-btn {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &.active {
+        background: #667eea;
+        color: white;
+      }
+
+      &:not(.active) {
+        background: #e0e0e0;
+        color: #666;
+      }
+    }
+
+    .items-list {
+      margin-top: 1rem;
+      max-height: 200px;
+      overflow-y: auto;
+
+      .item {
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          padding: 0.25rem 0.75rem;
+          background: #ff6b6b;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          font-size: 0.875rem;
+
+          &:hover {
+            background: #ee5a52;
+          }
+        }
+      }
+
+      .empty-state {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+      }
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+
+      button {
+        flex: 1;
+        padding: 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:first-child {
+          background: #ff6b6b;
+          color: white;
+
+          &:hover {
+            background: #ee5a52;
+          }
+        }
+
+        &:last-child {
+          background: #51cf66;
+          color: white;
+
+          &:hover {
+            background: #47b95c;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+<div class="cart-container">
+  <h1>🛒 Shopping Cart</h1>
+  <p class="subtitle">Complex state management with signals</p>
+
+  <div class="shop-layout">
+    <div class="products-section">
+      <h2>Products</h2>
+      <div class="products-grid">
+        @for (product of products(); track product.id) {
+          <div class="product-card">
+            <div class="product-image">{{ product.image }}</div>
+            <h3>{{ product.name }}</h3>
+            <p class="price">${{ product.price.toFixed(2) }}</p>
+            <button (click)="addToCart(product)" class="add-btn">Add to Cart</button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="cart-section">
+      <div class="cart-header">
+        <h2>Cart</h2>
+        <span class="badge">{{ itemCount() }} items</span>
+      </div>
+
+      @if (!isEmpty()) {
+        <div class="cart-items">
+          @for (item of cartItems(); track item.id) {
+            <div class="cart-item">
+              <span class="item-image">{{ item.image }}</span>
+              <div class="item-info">
+                <h4>{{ item.name }}</h4>
+                <p class="item-price">${{ item.price.toFixed(2) }}</p>
+              </div>
+              <div class="quantity-controls">
+                <button (click)="updateQuantity(item.id, item.quantity - 1)">-</button>
+                <input 
+                  type="number" 
+                  [value]="item.quantity" 
+                  (input)="updateQuantity(item.id, +$any($event.target).value)"
+                  min="1"
+                />
+                <button (click)="updateQuantity(item.id, item.quantity + 1)">+</button>
+              </div>
+              <span class="item-total">${{ (item.price * item.quantity).toFixed(2) }}</span>
+              <button (click)="removeFromCart(item.id)" class="remove-btn">×</button>
+            </div>
+          }
+        </div>
+
+        <div class="discount-section">
+          <input 
+            type="text" 
+            [value]="discountCode()" 
+            (input)="applyDiscount($any($event.target).value)"
+            placeholder="Discount code"
+          />
+          @if (discount() > 0) {
+            <span class="discount-applied">✅ {{ discountCode() }} applied!</span>
+          }
+          <p class="hint">Try: SAVE10 or SAVE20</p>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span>${{ subtotal().toFixed(2) }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Tax (10%):</span>
+            <span>${{ tax().toFixed(2) }}</span>
+          </div>
+          @if (discount() > 0) {
+            <div class="summary-row discount">
+              <span>Discount:</span>
+              <span>-${{ discount().toFixed(2) }}</span>
+            </div>
+          }
+          <div class="summary-row total">
+            <strong>Total:</strong>
+            <strong>${{ total().toFixed(2) }}</strong>
+          </div>
+        </div>
+
+        <div class="cart-actions">
+          <button (click)="clearCart()" class="clear-btn">Clear Cart</button>
+          <button class="checkout-btn">Checkout</button>
+        </div>
+      } @else {
+        <div class="empty-cart">
+          <p>🛒 Your cart is empty</p>
+          <p>Add some products to get started!</p>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="code-section">
+    <h3>Computed Calculations</h3>
+    <pre><code>cart = signal&lt;CartItem[]>([]);
+discountCode = signal('');
+
+subtotal = computed(() => 
+  cart().reduce((sum, item) => 
+    sum + (item.price * item.quantity), 0
+  )
+);
+
+tax = computed(() => subtotal() * 0.1);
+
+discount = computed(() => &#123;
+  const code = discountCode().toUpperCase();
+  if (code === 'SAVE10') return subtotal() * 0.1;
+  if (code === 'SAVE20') return subtotal() * 0.2;
+  return 0;
+&#125;);
+
+total = computed(() => 
+  subtotal() + tax() - discount()
+);</code></pre>
+  </div>
+</div>
