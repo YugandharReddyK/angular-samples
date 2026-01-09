@@ -1,0 +1,44 @@
+<div class="change-detection-container">
+  <h1>🔄 Change Detection Strategies</h1>
+  <p class="subtitle">Understanding Default vs OnPush</p>
+
+  <div class="demo-grid">
+    <div class="demo-section">
+      <h2>Default Strategy</h2>
+      <p class="hint">Checks on every change detection cycle</p>
+      <app-change-detection-default [user]="defaultUser()" />
+      <div class="controls">
+        <button (click)="updateDefaultUserMutate()" class="warn-btn">
+          Mutate Object (Won't Update!)
+        </button>
+        <button (click)="updateDefaultUserImmutable()" class="success-btn">
+          Immutable Update (✓ Works)
+        </button>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>OnPush Strategy</h2>
+      <p class="hint">Only checks when inputs change (reference) or events fire</p>
+      <app-change-detection-onpush [user]="onPushUser()" />
+      <div class="controls">
+        <button (click)="updateOnPushUserMutate()" class="warn-btn">
+          Mutate Object (Won't Update!)
+        </button>
+        <button (click)="updateOnPushUserImmutable()" class="success-btn">
+          Immutable Update (✓ Works)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>💡 Key Takeaways</h3>
+    <ul>
+      <li><strong>Default:</strong> Checks component tree on every change detection cycle</li>
+      <li><strong>OnPush:</strong> Only checks when &#64;Input() reference changes or component events fire</li>
+      <li><strong>Use OnPush</strong> for better performance with immutable data patterns</li>
+      <li><strong>Signals work perfectly</strong> with OnPush - they create new references</li>
+    </ul>
+  </div>
+</div>

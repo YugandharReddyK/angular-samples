@@ -1,0 +1,13 @@
+﻿.deferrable-container {
+  .demo-section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    h2 { color: #667eea; margin-bottom: 1rem; }
+    .spacer { height: 400px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-radius: 8px; font-size: 1.5rem; color: #666; }
+    .placeholder { padding: 4rem; background: #f8f9fa; text-align: center; border-radius: 8px; font-size: 1.25rem; cursor: pointer; &.hover-placeholder:hover { background: #e9ecef; } button { margin-top: 1rem; background: #667eea; color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; cursor: pointer; } }
+    .loading { padding: 2rem; text-align: center; color: #667eea; }
+  }
+}

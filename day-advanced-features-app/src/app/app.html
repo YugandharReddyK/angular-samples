@@ -1,0 +1,14 @@
+﻿<nav class="navbar">
+  <h1> Advanced Angular Features</h1>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/change-detection" routerLinkActive="active">Change Detection</a>
+    <a routerLink="/deferrable-views" routerLinkActive="active">Deferrable Views</a>
+    <a routerLink="/signal-state" routerLinkActive="active">Signal State</a>
+    <a routerLink="/dynamic-components" routerLinkActive="active">Dynamic Components</a>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>

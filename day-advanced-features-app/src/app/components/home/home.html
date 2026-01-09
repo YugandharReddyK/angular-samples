@@ -1,0 +1,58 @@
+<div class="home-container">
+  <div class="hero">
+    <h1>{{ title() }}</h1>
+    <p class="subtitle">Days 24, 25, 26, 28 - Modern Angular Patterns</p>
+  </div>
+
+  <div class="features-grid">
+    @for (feature of features; track feature.route) {
+      <a [routerLink]="feature.route" class="feature-card">
+        <div class="icon">{{ feature.icon }}</div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </a>
+    }
+  </div>
+
+  <div class="info-section">
+    <h2>🎯 What You'll Learn</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h4>Performance Optimization</h4>
+        <ul>
+          <li>OnPush change detection</li>
+          <li>Immutable data patterns</li>
+          <li>markForCheck() and detectChanges()</li>
+          <li>Lazy loading with &#64;defer</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>State Management</h4>
+        <ul>
+          <li>Signal-based state</li>
+          <li>Computed values</li>
+          <li>Effects for side effects</li>
+          <li>Service-based state pattern</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Dynamic Rendering</h4>
+        <ul>
+          <li>ViewContainerRef</li>
+          <li>ComponentRef</li>
+          <li>Runtime component creation</li>
+          <li>Modal/toast patterns</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>Best Practices</h4>
+        <ul>
+          <li>Zone-less applications</li>
+          <li>Fine-grained reactivity</li>
+          <li>Type-safe state</li>
+          <li>Scalable architecture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

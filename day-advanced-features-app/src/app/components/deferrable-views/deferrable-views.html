@@ -1,0 +1,101 @@
+<div class="deferrable-container">
+  <h1>⚡ Deferrable Views (&#64;defer)</h1>
+  <p class="subtitle">Lazy load components for better performance</p>
+
+  <div class="demo-section">
+    <h2>1. Defer on Viewport (Scroll Down)</h2>
+    <p>Chart loads automatically when it enters the viewport</p>
+    
+    <div class="spacer">Scroll down to see the magic ↓</div>
+    
+    @defer (on viewport) {
+      <app-heavy-chart />
+    } @placeholder {
+      <div class="placeholder">
+        📊 Chart will load when you scroll here...
+      </div>
+    } @loading (minimum 500ms) {
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading chart...
+      </div>
+    }
+  </div>
+
+  <div class="demo-section">
+    <h2>2. Defer on Interaction (Click Button)</h2>
+    <p>Chart loads when you click the trigger button</p>
+    
+    @defer (on interaction) {
+      <app-heavy-chart />
+    } @placeholder {
+      <div class="placeholder">
+        <button>Click me to load chart</button>
+      </div>
+    } @loading {
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading...
+      </div>
+    }
+  </div>
+
+  <div class="demo-section">
+    <h2>3. Defer on Hover</h2>
+    <p>Chart loads when you hover over the placeholder</p>
+    
+    @defer (on hover) {
+      <app-heavy-chart />
+    } @placeholder {
+      <div class="placeholder hover-placeholder">
+        👆 Hover over me to load chart
+      </div>
+    } @loading {
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading...
+      </div>
+    }
+  </div>
+
+  <div class="demo-section">
+    <h2>4. Defer on Idle</h2>
+    <p>Chart loads when browser is idle</p>
+    
+    @defer (on idle) {
+      <app-heavy-chart />
+    } @placeholder {
+      <div class="placeholder">
+        ⏳ Will load when browser is idle...
+      </div>
+    } @loading {
+      <div class="loading">
+        <span class="spinner"></span>
+        Loading...
+      </div>
+    }
+  </div>
+
+  <div class="info-box">
+    <h3>💡 Defer Triggers</h3>
+    <ul>
+      <li><strong>on viewport</strong> - Loads when element enters viewport (Intersection Observer)</li>
+      <li><strong>on interaction</strong> - Loads on click, focus, or touch</li>
+      <li><strong>on hover</strong> - Loads when mouse hovers over element</li>
+      <li><strong>on idle</strong> - Loads when browser is idle (requestIdleCallback)</li>
+      <li><strong>on immediate</strong> - Loads immediately after rendering</li>
+      <li><strong>on timer(ms)</strong> - Loads after specified delay</li>
+      <li><strong>when (condition)</strong> - Loads when signal/expression becomes true</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>✨ Benefits</h3>
+    <ul>
+      <li>✅ <strong>Faster initial load</strong> - Reduce bundle size</li>
+      <li>✅ <strong>Better performance</strong> - Load heavy components only when needed</li>
+      <li>✅ <strong>Improved UX</strong> - Show placeholders while loading</li>
+      <li>✅ <strong>Automatic code splitting</strong> - Angular handles it for you</li>
+    </ul>
+  </div>
+</div>

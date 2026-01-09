@@ -1,0 +1,141 @@
+<div class="signal-state-container">
+  <h1>📊 Signal-Based State Management</h1>
+  <p class="subtitle">Reactive state without external libraries</p>
+
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-value">{{ todoState.totalCount() }}</div>
+      <div class="stat-label">Total Todos</div>
+    </div>
+    <div class="stat-card active">
+      <div class="stat-value">{{ todoState.activeCount() }}</div>
+      <div class="stat-label">Active</div>
+    </div>
+    <div class="stat-card completed">
+      <div class="stat-value">{{ todoState.completedCount() }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card priority">
+      <div class="stat-value">{{ todoState.highPriorityCount() }}</div>
+      <div class="stat-label">High Priority</div>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="todo-section">
+      <h2>Todo List with Signals</h2>
+      
+      <div class="add-todo">
+        <input 
+          type="text" 
+          [value]="newTodoText()" 
+          (input)="newTodoText.set($any($event.target).value)"
+          (keyup.enter)="addTodo()"
+          placeholder="What needs to be done?"
+          class="todo-input"
+        />
+        <select 
+          [value]="selectedPriority()" 
+          (change)="selectedPriority.set($any($event.target).value)"
+          class="priority-select"
+        >
+          @for (priority of priorities; track priority) {
+            <option [value]="priority">{{ priority }}</option>
+          }
+        </select>
+        <button (click)="addTodo()" class="add-btn">Add</button>
+      </div>
+
+      <div class="filters">
+        @for (filter of filters; track filter) {
+          <button 
+            (click)="setFilter(filter)"
+            [class.active]="todoState.currentFilter() === filter"
+            class="filter-btn"
+          >
+            {{ filter | titlecase }}
+          </button>
+        }
+      </div>
+
+      <div class="todos-list">
+        @for (todo of todoState.filteredTodos(); track todo.id) {
+          <div class="todo-item" [class.completed]="todo.completed">
+            <input 
+              type="checkbox" 
+              [checked]="todo.completed" 
+              (change)="todoState.toggleTodo(todo.id)"
+            />
+            <span class="todo-text">{{ todo.text }}</span>
+            <span class="todo-priority" [class]="getPriorityClass(todo.priority)">
+              {{ todo.priority }}
+            </span>
+            <button (click)="todoState.deleteTodo(todo.id)" class="delete-btn">×</button>
+          </div>
+        } @empty {
+          <div class="empty-state">
+            @if (todoState.currentFilter() === 'all') {
+              <p>🎉 No todos yet. Add one to get started!</p>
+            } @else if (todoState.currentFilter() === 'active') {
+              <p>✅ All done! No active todos.</p>
+            } @else {
+              <p>💭 No completed todos yet.</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="todo-actions">
+        <button (click)="todoState.toggleAll()" class="action-btn">
+          Toggle All
+        </button>
+        <button (click)="todoState.clearCompleted()" class="action-btn">
+          Clear Completed
+        </button>
+        <button (click)="todoState.clearAll()" class="action-btn danger">
+          Clear All
+        </button>
+      </div>
+    </div>
+
+    <div class="code-section">
+      <h3>💻 State Service Example</h3>
+      <pre><code>// todo-state.service.ts
+private todos = signal&lt;Todo[]&gt;([]);
+
+// Computed signals (derived state)
+activeTodos = computed(() =&gt; 
+  this.todos().filter(t =&gt; !t.completed)
+);
+
+activeCount = computed(() =&gt; 
+  this.activeTodos().length
+);
+
+// Actions
+addTodo(text: string): void &#123;
+  const newTodo: Todo = &#123;
+    id: Date.now(),
+    text,
+    completed: false
+  &#125;;
+  
+  this.todos.update(todos =&gt; 
+    [...todos, newTodo]
+  );
+&#125;</code></pre>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>✨ Benefits of Signal-Based State</h3>
+    <ul>
+      <li>✅ <strong>Simple</strong> - No boilerplate, built into Angular</li>
+      <li>✅ <strong>Performant</strong> - Fine-grained reactivity</li>
+      <li>✅ <strong>Type-safe</strong> - Full TypeScript support</li>
+      <li>✅ <strong>Testable</strong> - Easy to test services</li>
+      <li>✅ <strong>Composable</strong> - Computed signals for derived state</li>
+      <li>✅ <strong>Automatic</strong> - Effects for side effects (auto-save to localStorage)</li>
+    </ul>
+  </div>
+</div>

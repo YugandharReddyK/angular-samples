@@ -1,0 +1,8 @@
+<div class="detection-card default">
+  <div class="badge">Default</div>
+  <h3>{{ user.name }}</h3>
+  <p>Age: {{ user.age }}</p>
+  <p class="checks">Checks: {{ checksCount }}</p>
+  <p class="random">Random: {{ random | number: '1.0-4' }}</p>
+  <p class="note">⚠️ Random getter called on EVERY change detection!</p>
+</div>

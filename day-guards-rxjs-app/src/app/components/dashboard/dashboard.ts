@@ -17,6 +17,7 @@ export class Dashboard {
     public authService: Auth,
     private router: Router
   ) {
+    debugger;
     this.currentUser$ = authService.currentUser$;
   }
 

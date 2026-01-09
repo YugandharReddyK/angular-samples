@@ -104,6 +104,8 @@ export class Counter {
   templateUrl: './signal-inputs.html',
   styleUrl: './signal-inputs.scss'
 })
+
+
 export class SignalInputs {
   // Parent signals
   users = signal([

@@ -1,0 +1,17 @@
+<div class="chart-container">
+  <div class="chart-header">
+    <h3>📊 Heavy Chart Component</h3>
+    <p class="load-time">Loaded in {{ loadTime() | number: '1.0-2' }}ms</p>
+  </div>
+  
+  <div class="chart">
+    @for (value of data(); track $index) {
+      <div class="bar" [style.height.%]="getBarHeight(value)" [title]="value">
+      </div>
+    }
+  </div>
+  
+  <p class="chart-info">
+    ✅ This component was lazy loaded! Check the console for load time.
+  </p>
+</div>

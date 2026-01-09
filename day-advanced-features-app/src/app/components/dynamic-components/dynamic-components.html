@@ -1,0 +1,61 @@
+<div class="dynamic-container">
+  <h1>🎨 Dynamic Components</h1>
+  <p class="subtitle">Create and render components programmatically at runtime</p>
+
+  <div class="controls">
+    <button (click)="showSuccess()" class="success-btn">Show Success</button>
+    <button (click)="showError()" class="error-btn">Show Error</button>
+    <button (click)="showWarning()" class="warning-btn">Show Warning</button>
+    <button (click)="showInfo()" class="info-btn">Show Info</button>
+    <button (click)="clearAll()" class="clear-btn">Clear All</button>
+  </div>
+
+  <div class="stats">
+    <p>Total components created: <strong>{{ componentCount() }}</strong></p>
+    <p class="note">ℹ️ Components auto-remove after 5 seconds</p>
+  </div>
+
+  <!-- Dynamic container where components will be inserted -->
+  <div #dynamicContainer class="dynamic-content"></div>
+
+  <div class="code-section">
+    <h3>💻 Implementation Example</h3>
+    <pre><code>// Component
+&#64;ViewChild('dynamicContainer', &#123; read: ViewContainerRef &#125;)
+container!: ViewContainerRef;
+
+showSuccess(): void &#123;
+  // Create component dynamically
+  const componentRef = this.container.createComponent(SuccessAlert);
+  
+  // Set component inputs
+  componentRef.instance.title = 'Success!';
+  componentRef.instance.message = 'Operation completed';
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() =&gt; componentRef.destroy(), 5000);
+&#125;</code></pre>
+  </div>
+
+  <div class="info-box">
+    <h3>💡 Use Cases</h3>
+    <ul>
+      <li><strong>Modals/Dialogs</strong> - Open dialogs dynamically</li>
+      <li><strong>Toast Notifications</strong> - Show messages on the fly</li>
+      <li><strong>Dynamic Forms</strong> - Build forms from configuration</li>
+      <li><strong>Tab Content</strong> - Load tab content dynamically</li>
+      <li><strong>Dashboard Widgets</strong> - Add/remove widgets at runtime</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>✨ Key APIs</h3>
+    <ul>
+      <li><strong>ViewContainerRef</strong> - Container for dynamic views</li>
+      <li><strong>createComponent()</strong> - Create component instance</li>
+      <li><strong>ComponentRef</strong> - Reference to component instance</li>
+      <li><strong>destroy()</strong> - Remove component from DOM</li>
+      <li><strong>clear()</strong> - Remove all components from container</li>
+    </ul>
+  </div>
+</div>
